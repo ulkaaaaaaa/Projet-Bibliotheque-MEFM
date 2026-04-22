@@ -4,11 +4,11 @@
 #include <time.h>
 #include <string.h>
 
-/* --- Rôles --- */
+/*  Poste  */
 #define ETUDIANT 0
 #define PROFESSEUR 1
 
-/* --- Structure Livre --- */
+/*  Structure Livre */
 typedef struct {
     int id;
     char titre[100];
@@ -19,7 +19,7 @@ typedef struct {
     char loginEmprunteur[50]; 
 } Livre;
 
-/* --- Structure Utilisateur --- */
+/*  Structure Utilisateur  */
 typedef struct {
     char login[50];
     char mdp[50];
@@ -27,8 +27,20 @@ typedef struct {
     int nbLivresActuels;  
 } Utilisateur;
 
-/* --- Tes fonctions (Prototypes) --- */
+/* Yousef : Gestion des Données  */
+void chargerLivres(Livre inventaire[], int *nbTotal);
+void chargerUtilisateurs(Utilisateur liste[], int *nbUsers);
+void sauvegarderTout(Livre inventaire[], int nbL, Utilisateur liste[], int nbU);
+
+/* Uliana : Logique Métier */
 time_t calculerDateRetour(int role);
-int verifierRetardLivre(time_t echeance);
+int verifierRetard(time_t echeance);
+void trierLivresTitre(Livre inventaire[], int n);
+int peutEmprunter(Utilisateur u, Livre inventaire[], int n);
+
+/* Jeanne : Interface et Main  */
+void afficherMenuPrincipal();
+void afficherListeLivres(Livre inventaire[], int n);
+int saisieEntiereSecurisee();
 
 #endif
