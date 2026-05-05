@@ -16,3 +16,14 @@ int saisirEntierSecurise() {
     }
     viderTampon();  //nettoie le \n restant//
     return entier;
+
+void menuDepart() {
+    printf("Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech")
+    printf(" Se connecter ")
+    printf(" Créer un compte ")
+    printf(" Quitter ")
+
+
+
+void menuPrincipal() {
+}
