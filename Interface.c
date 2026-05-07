@@ -18,11 +18,17 @@ int saisirEntierSecurise() {
     return entier;
 
 void menuDepart() {
-    printf("Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech")
-    printf(" Se connecter ")
-    printf(" Créer un compte ")
-    printf(" Quitter ")
-
+    printf("\033[1;36m"); //cyan pour tout le texte + gras avec "1"//
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║   Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech")    ║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("║ 1. Se connecter                                                               ║\n");
+    printf("
+    printf("║ 2. Créer un compte                                                            ║\n");
+    printf("║ 3. Quitter                                                                    ║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("\n");
+    printf("▬▬▶Entrer le chiffre correspondant à votre demande."\n);
 
 
 void menuPrincipal() {
