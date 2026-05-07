@@ -18,16 +18,39 @@ int saisirEntierSecurise() {
     return entier;
 
 void menuDepart() {
-    printf("\033[1;36m"); //cyan pour tout le texte + gras avec "1"//
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    printf("║   Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech")    ║\n");
+    printf("║   ");
+    printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
+
+    printf("Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech"    \n");
+
+    printf("\033[0m");   // retour noir //
+    printf("║");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
-    printf("║ 1. Se connecter                                                               ║\n");
-    printf("
-    printf("║ 2. Créer un compte                                                            ║\n");
-    printf("║ 3. Quitter                                                                    ║\n");
+    printf("║");
+
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf(" 1. Se connecter                                                               ");
+
+    printf("\033[0m");   // retour noir //
+    printf("║\n");
+
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf(" 2. Créer un compte                                                            ");
+    printf("║");
+
+    printf("\033[0m");   // retour noir //
+    printf("\033[31m");  // rouge //
+    printf(" 3. Quitter                                                                    ");
+
+    printf("\033[0m"); // retour noir //
+    printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
+
+
+
+
     printf("▬▬▶Entrer le chiffre correspondant à votre demande."\n);
 
 
