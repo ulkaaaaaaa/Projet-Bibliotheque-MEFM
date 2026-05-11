@@ -35,6 +35,7 @@ void sauvegarderTout(Livre inventaire[], int nbL, Utilisateur liste[], int nbU);
 /* Uliana : Logique Métier */
 time_t calculerDateRetour(int role);
 int verifierRetard(time_t limite);
+int avoirDesRetard( Utilisateur u, Livre inventaire[],int nbLivres);
 void trierLivresTitre(Livre inventaire[], int n);
 int peutEmprunter(Utilisateur u, Livre inventaire[], int n);
 
