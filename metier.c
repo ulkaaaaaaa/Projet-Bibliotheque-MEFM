@@ -49,10 +49,28 @@ int peutEmprunter(Utilisateur u, Livre inventaire[], int nbLivres) {
     if (u.role == PROFESSEUR && u.nbLivresActuels >= MAX_LIVRES_PROF) {
         return 0; /* Refuse =Quota profatteint */
     }
-
-    /* Blocage si retard en cours */
     if (aDesRetards(u, inventaire, nbLivres) == 1) {
         return 0; /* Refusé=  L'utilisateur doit d'abord rendre ses livres en retard */
     }
     return 1; /* Tout est bon */
 }
+
+
+
+/* Valide l'emprunt d'un livre par un utilisateur */
+void traiterEmprunt(Livre *l, Utilisateur *u) {
+    l->estEmprunte = 1;                           /* Le livre est pas libre */
+    strcpy(l->loginEmprunteur, u->login);         
+    l->dateRetour = calculerDateRetour(u->role);  
+    u->nbLivresActuels = u->nbLivresActuels + 1;  
+}
+
+/* Valide le retour d'un livre à la bibliothèque */
+void traiterRetour(Livre *l, Utilisateur *u) {
+    l->estEmprunte = 0;                           /* Le livre est libre */
+    strcpy(l->loginEmprunteur, "");               
+    l->dateRetour = 0;                            
+    u->nbLivresActuels = u->nbLivresActuels - 1;  
+}
+
+
