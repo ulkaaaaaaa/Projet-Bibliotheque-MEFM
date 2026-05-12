@@ -23,6 +23,17 @@ int nbEmprunts;
 extern Livre tabLivres[MAX_EMPRUNTS];
 
 extern Utilisateurs
+tabUtilisateurs[MAX_UTILISATEURS];
+extern int nbUtilisateurs;
+extern int nbUtilisatuers;
+void initialiserBibliotheque()
+int chargerLivres(char nomFichier[]);
+int chargerUtilisateurs(char nomFichiers[]);
+int sauvegarderLivres(char nomFichiers[]);
+int sauvegarderUtilisateurs(char nomFichier[]);
+int authentifier(char login[], char mot
+
+
 
 
 
