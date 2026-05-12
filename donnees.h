@@ -1,9 +1,8 @@
 #ifdef DONNEES_H
 #define DONNEES_H
 #define MAX_LIVRES 200
-
-
-
+#define MAX_UTILISATEURS 100
+#define MAX_EMPRUNTS 5
 
 typdef struct {
   int id;
