@@ -2,7 +2,8 @@
 #define DONNEES_H
 #define MAX_LIVRES 200
 #define MAX_UTILISATEURS 100
-#define MAX_EMPRUNTS 5
+#define MAX_LIVRES_PROF 5
+#define MAX_LIVRES_ETUDIANT 3
 
 typdef struct {
   int id;
@@ -20,7 +21,7 @@ typedef struct {
   int nbEmprunts;
 } Utilisateur;
 
-extern Livre tabLivres[MAX_EMPRUNTS];
+extern Livre tabLivres[MAX_LIVRES];
 extern UtilisateurstabUtilisateurs[MAX_UTILISATEURS];
 
 extern int nbUtilisateurs;
