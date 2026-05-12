@@ -29,9 +29,51 @@ void initialiserBibliothque(){
   }
 }
 
-int authentifier(char login[], char
-motdepasse[]){
+int authentifier(char login[], char motDePasse[]){
   int i;
 
   for (i = 0; i < nbUtilisateurs; i++){
-    if (struct(tabUtilisateurs[i]motdepasse,m
+    if (strcmp(tabUtilisateurs[i].login ,login) == 0 &&
+        strcmp(tabUtilisateurs[i].motDePasse, motDePasse) == 0) {
+        return i;
+    }
+  }
+  return -1;
+}
+int creerCompte(char[], char motDePasse[], char role[]){
+  int i;
+  int j ;
+
+  if(nbUtilisateurs >= MAX_UTILISATEURS) {
+    return 0;
+  }
+
+  if (strcmp(role, "etudiant") != 0 && strcmp(role, "professeur") != 0) {
+    return 0; 
+  }
+
+  for (i = 0; i < nbUtilisateurs; i++) {
+    if (strcmp(tabUtilisateurs[i].login, login) == 0) {
+    }
+  }
+
+  strcpy(tabUtilisateurs[nbUtilisateurs].login, login);
+  strcpy(tabUtilisateurs[nbUtilisateurs].motDePasse, motDePasse);
+  strcpy(tabUtilisateurs[nbUtilisateurs].role, role);
+
+  tabUtilisateurs[nbUtilisateurs].nbEmprunts = 0;
+  for (j = 0; < MAX_EMPRUNTS; j++) {
+    tabUtilisateursnbUtilisateurs].emprunts[j] = -1;
+  }
+
+  nbUtilisateurs++;
+
+  return 1;
+}
+void afficherLivres() {
+  int i;
+
+  printf("\n--- Liste des livres ---\n");
+
+  for (i = 0; i < nbLivres; i++) {
+    printf("%d 
