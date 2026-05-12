@@ -14,7 +14,7 @@ int disponible;
 
 typedef struct {
 char login[50];
-char motDePasse[50];        /
+char motdepasse[50];        /
 char role[20];
 int emprunts[MAX_EMPRUNTS];
 int nbEmprunts;
@@ -31,7 +31,11 @@ int chargerLivres(char nomFichier[]);
 int chargerUtilisateurs(char nomFichiers[]);
 int sauvegarderLivres(char nomFichiers[]);
 int sauvegarderUtilisateurs(char nomFichier[]);
-int authentifier(char login[], char mot
+int authentifier(char login[], char motdepasse[]);
+int creerCompte(char login[], char motdepasse[], char role[]);
+void afficherLivres();
+void afficherUtilisateurs();
+
 
 
 
