@@ -59,11 +59,11 @@ void menuDepart() {
 
 
 void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il en est//
-    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
 
-    printf("Nom utilisateur : %s", &utilisateur.nom); 
+    printf("Nom utilisateur : %s                                                         ", &Utilisateur.nom); 
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
@@ -71,25 +71,25 @@ void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il 
     printf("║");
 
     printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 1. Emprunter un nouveau livre                                               ");
+    printf(" 1. Emprunter un nouveau livre                                                 ");
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 2. Rendre un livre                                                          ");
+    printf(" 2. Rendre un livre                                                            ");
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 3. Voir mes retards                                                          ");
+    printf(" 3. Voir mes retards                                                           ");
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[31m");  // rouge //
-    printf(" 4. Se deconnecter                                                                    ");
+    printf(" 4. Se deconnecter                                                             ");
 
     printf("\033[0m"); // retour blanc //
     printf("║\n");
@@ -99,20 +99,30 @@ void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il 
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
     return 0;
-}
 
 int deconnection(){
     int a;
+    int main() {
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
     printf("│");
-    printf("│     Voulez-vous vraiment vous deconnecter?");
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf("          Voulez-vous vraiment vous deconnecter?            ");
+    printf("\033[0m"); // retour blanc //
+    
     printf("│\n");
     printf("│");
-    printf(" 1.Oui")
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf(" 1.Oui                                                      ");
+    printf("\033[0m"); // retour blanc //
+    
     printf("│\n");
     printf("│");
-    printf(" 2.Non");
+    printf("\033[31m");  // rouge //
+    printf(" 2.Non                                                      ");
+    printf("\033[0m"); // retour blanc //
+
     printf("│\n");
+    printf("└────────────────────────────────────────────────────────────┘\n");  
     do{
     a = saisirEntierSecurise(a);
     }while(a != 1 || a != 2);
