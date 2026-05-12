@@ -22,7 +22,7 @@ typedef struct {
 /*  Structure Utilisateur  */
 typedef struct {
     char login[50];
-    char mdp[50];
+    char mdp[21];
     int role;             /* 0 pour etudiant, 1 pour prof */
     int nbLivresActuels;  
 } Utilisateur;
