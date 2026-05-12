@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "donnees.h>
+#include "donnees.h"
 
-Livre tabLivres[
+Livre tabLivres[MAX_LIVES];
+utilisateur tabUtilisat
