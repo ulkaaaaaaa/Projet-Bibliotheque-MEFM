@@ -1,3 +1,3 @@
 void viderTampon();
 int saisirEntierSecurise();
-void menuPrincipal(utilisateur u); //Nom?//
+void menuDepart(Utilisateur u);
