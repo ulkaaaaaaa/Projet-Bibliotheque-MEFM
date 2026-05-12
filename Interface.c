@@ -58,12 +58,12 @@ void menuDepart() {
 
 
 
-void menuPrincipal() {
+void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il en est//
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
 
-    printf("Nom utilisateur : %s", &nom.utilisateur); 
+    printf("Nom utilisateur : %s", &utilisateur.nom); 
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
@@ -83,7 +83,7 @@ void menuPrincipal() {
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 3. Voir mes emprunts                                                          ");
+    printf(" 3. Voir mes retards                                                          ");
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
@@ -99,4 +99,26 @@ void menuPrincipal() {
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
     return 0;
+}
+
+int deconnection(){
+    int a;
+    printf("┌────────────────────────────────────────────────────────────┐\n"); 
+    printf("│");
+    printf("│     Voulez-vous vraiment vous deconnecter?");
+    printf("│\n");
+    printf("│");
+    printf(" 1.Oui")
+    printf("│\n");
+    printf("│");
+    printf(" 2.Non");
+    printf("│\n");
+    do{
+    a = saisirEntierSecurise(a);
+    }while(a != 1 || a != 2);
+    if (a == 1){
+        return 1;
+    } else{ 
+        return 0;
+    }
 }
