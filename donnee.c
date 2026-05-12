@@ -33,4 +33,5 @@ int authentifier(char login[], char
 motdepasse[]){
   int i;
 
-  for (i = 0; i < nb 
+  for (i = 0; i < nbUtilisateurs; i++){
+    if (struct(tabUtilisateurs[i]motdepasse,m
