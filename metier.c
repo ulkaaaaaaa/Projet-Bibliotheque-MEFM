@@ -8,7 +8,7 @@ time_t calculerDateRetour(int role) {
     
     /*  Si l'utilisateur n'est pas PROFESSEUR, on applique la regle etudiant par defauf pour eviter un bug*/
     if (role == PROFESSEUR) {
-        return actuelle+180;/* ajoute 180 secondes (3 minutes) pour un prof */
+        return actuelle+180; /* ajoute 180 secondes (3 minutes) pour un prof */
     } else {
         return actuelle +120; /* ajoute 120 secondes(2 minutes) pour etudiant*/
     }
@@ -72,28 +72,28 @@ int peutEmprunter(Utilisateur u, Livre inventaire[], int nbLivres) {
 /* Valide l'emprunt d'un livre par un utilisateur */
 void traiterEmprunt(Livre *l, Utilisateur *u) {
     if (l == NULL || u == NULL){
-        return; /* verif pour eviter le crash*/
+        return;  /* verif pour eviter le crash*/
     }
 
-    l->estEmprunte = 1; /* Le livre est pas libre */
-    strncpy(l->loginEmprunteur, u->login, sizeof(l->loginEmprunteur) - 1); /*eviter le debordement avzc strncpy*/
+    l->estEmprunte = 1;  /* Le livre est pas libre */
+    strncpy(l->loginEmprunteur, u->login, sizeof(l->loginEmprunteur) - 1);  /*eviter le debordement avzc strncpy*/
     l->loginEmprunteur[sizeof(l->loginEmprunteur) - 1] = '\0';         
     l->dateRetour = calculerDateRetour(u->role);  
     u->nbLivresActuels = u->nbLivresActuels + 1;  
 }
 
-/* Valide le retour d'un livre à la bibliotheque */
+
 void traiterRetour(Livre *l, Utilisateur *u) {
     if (l == NULL || u == NULL){
         return;
     }
 
-    l->estEmprunte = 0;/* Le livre est libre */
+    l->estEmprunte = 0; /* Le livre est libre */
     strcpy(l->loginEmprunteur, "");               
     l->dateRetour = 0;                            
     
-    /* secu si nb de livres negatifs */
-    if (u->nbLivresActuels > 0) {
+   
+    if (u->nbLivresActuels > 0) {  /* secu si nb de livres negatifs */
         u->nbLivresActuels = u->nbLivresActuels - 1;  
     }
 }
