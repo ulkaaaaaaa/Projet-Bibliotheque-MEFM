@@ -9,14 +9,14 @@ typdef struct {
   char titre[100];
   char auteur[100];
   char categorie[50];
-  int disponible;
+  int disponible; // 1 = libre , 0 = emprunté
 } Livre;
 
 typedef struct {
   char login[50];
-  char motdepasse[50];        /
+  char motdepasse[50];       
   char role[20];
-  int emprunts[MAX_EMPRUNTS];
+  int emprunts[MAX_EMPRUNTS]; // i
   int nbEmprunts;
 } Utilisateur;
 
