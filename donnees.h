@@ -17,7 +17,7 @@ typedef struct {
   char login[50];
   char motdepasse[21];       
   char role[20];
-  int emprunts[MAX_EMPRUNTS]; // i
+  int emprunts[MAX_EMPRUNTS];
   int nbEmprunts;
 } Utilisateur;
 
