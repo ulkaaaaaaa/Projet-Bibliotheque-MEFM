@@ -76,4 +76,29 @@ void afficherLivres() {
   printf("\n--- Liste des livres ---\n");
 
   for (i = 0; i < nbLivres; i++) {
-    printf("%d 
+    printf("%d | %s | %s | %s | ",
+          tabLivres[i].id,
+          tabLivres[i].titre,
+          tabLivres[i].auteur,
+          tabLivres[i].categrie);
+   
+    if (tabLivres[i].disponible == 1) {
+      printf("Disponible\n");
+    } else {
+      printf("Emprunts\n");
+    }
+  }
+}
+
+void afficherUtilisateurs() {
+  int i;
+
+  printf("\n--- Liste des utilisateurs ---\n");
+
+  for (i = 0; i < nbUtilisateurs; i++) {
+    printf("%s | %s | %d emprunt(s)\n",
+      tabUtilisateurs[i].login,  
+      tabUtilisateurs[i].role,   
+      tabUtilisateurs[i].nbEmprunts);
+  }
+}
