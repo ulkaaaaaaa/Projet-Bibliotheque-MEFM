@@ -1,3 +1,10 @@
+#ifdef DONNEES_H
+#define DONNEES_H
+#define MAX_LIVRES 200
+
+
+
+
 typdef struct {
   int id;
 char titre[100];
