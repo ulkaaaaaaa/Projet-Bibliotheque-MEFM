@@ -99,6 +99,7 @@ printf("╔═══════════════════════
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
     return 0;
+}
 
 int deconnection(){
     int a;
@@ -131,4 +132,40 @@ int deconnection(){
     } else{ 
         return 0;
     }
+}
+
+void emprunterlivre(){
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║    ");
+    printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
+
+    printf("                     Emprunter un nouveau livre                            "); 
+
+    printf("\033[0m");   // retour blanc //
+    printf("║\n");
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("║");
+
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf(" 1.Rechercher                                                                  ");
+
+    printf("\033[0m");   // retour blanc //
+    printf("║\n");
+    printf("║");
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf(" 2. Voir la liste complète                                                     ");
+
+    printf("\033[0m");   // retour blanc //
+    printf("║\n");
+    printf("║");
+    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf(" 3. Quitter                                                                    ");
+    printf("\033[0m"); // retour blanc //
+    printf("║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("\n");
+    printf("\n");
+
+    printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
+    return 0;
 }
