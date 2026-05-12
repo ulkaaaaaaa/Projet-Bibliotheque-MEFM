@@ -10,7 +10,7 @@ typdef struct {
   char titre[100];
   char auteur[100];
   char categorie[50];
-  int disponible; // 1 = libre , 0 = emprunté
+  int disponible; // 1 = disponible , 0 = emprunté
 } Livre;
 
 typedef struct {
