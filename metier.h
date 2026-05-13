@@ -16,8 +16,8 @@ typedef struct {
     char titre[100];
     char auteur[100];
     char categorie[50];
-    int estEmprunte;      /* 0 = libre, 1 = pris */
-    time_t dateRetour;    /* Heure limite */
+    int estEmprunte;/* 0 = libre, 1 = pris */
+    time_t dateRetour;/* Heure limite */
     char loginEmprunteur[50]; 
 } Livre;
 
@@ -25,7 +25,7 @@ typedef struct {
 typedef struct {
     char login[50];
     char mdp[21];
-    int role;             /* 0 pour etudiant, 1 pour prof */
+    int role;/* 0 pour etudiant, 1 pour prof */
     int nbLivresActuels;  
 } Utilisateur;
 
