@@ -259,3 +259,15 @@ void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCibl
     }
     printf("==============================================\n");
 }
+
+
+/* Verifie si l'utilisateur a les droits pour ajouter un nouveau livre (si c'est un professeur) */
+int peutAjouterLivre(Utilisateur u) {
+    
+    if (u.role == PROFESSEUR) {
+        return 1; /* professeur */
+    }
+    
+    return 0; /*  un etudiant (ou une erreur) */
+}
+
