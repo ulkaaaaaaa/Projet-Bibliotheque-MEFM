@@ -76,7 +76,7 @@ int peutEmprunter(Utilisateur u, Livre inventaire[], int nbLivres) {
 int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat) {
     int i;
     int indexLivre = -1; /* pas encore trouvé */
-    int indexUser = -1;
+    int indexUtilisat = -1;
 
     /* verifie que les listes existent et ne sont pas vides */
     if (inventaire == NULL || nbLivres <= 0 || liste == NULL || nbUtilisat <= 0) {
@@ -93,12 +93,12 @@ int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int
     /*  Chercher la case de l'utilisateur dans la liste */
     for (i = 0; i < nbUtilisat; i++) {
         if (strcmp(liste[i].login, loginUtilisateur) == 0) {
-            indexUser = i; /* On a trouvé la case ! */
+            indexUtilksat = i; /* On a trouvé la case ! */
             break;
         }
     }
    /* Si on a trouve le livre  et l'utilisateur on lance l'emprunt */
-    if (indexLivre != -1 && indexUser != -1) {
+    if (indexLivre != -1 && indexUtilisat != -1) {
         
         /* verifie si le livre n'est pas  pris */
         if (inventaire[indexLivre].estEmprunte == 1) {
@@ -108,12 +108,12 @@ int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int
         inventaire[indexLivre].estEmprunte = 1;  
         
         /* eviter le debordement avec strncpy */
-        strncpy(inventaire[indexLivre].loginEmprunteur, liste[indexUser].login, sizeof(inventaire[indexLivre].loginEmprunteur) - 1);  
+        strncpy(inventaire[indexLivre].loginEmprunteur, liste[indexUtilisat].login, sizeof(inventaire[indexLivre].loginEmprunteur) - 1);  
         inventaire[indexLivre].loginEmprunteur[sizeof(inventaire[indexLivre].loginEmprunteur) - 1] = '\0';         
         
         /* On lance le chrono */
-        inventaire[indexLivre].dateRetour = calculerDateRetour(liste[indexUser].role);  
-        liste[indexUser].nbLivresActuels = liste[indexUser].nbLivresActuels + 1;  
+        inventaire[indexLivre].dateRetour = calculerDateRetour(liste[indexUtilisat].role);  
+        liste[indexUtilisat].nbLivresActuels = liste[indexUtilisat].nbLivresActuels + 1;  
 
         return 1; /* ca fonctionne */
     }
@@ -126,7 +126,7 @@ int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int
 int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat) {
     int i;
     int indexLivre = -1;
-    int indexUser = -1;
+    int indexUtilisat = -1;
 
     if (inventaire == NULL || nbLivres <= 0 || liste == NULL || nbUtilisat <= 0) {
         return 0;
@@ -141,15 +141,15 @@ int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int 
     }
 
     /* chercher l'utilisateur */
-    for (i = 0; i < nbUsers; i++) {
+    for (i = 0; i < nbUtilisat; i++) {
         if (strcmp(liste[i].login, loginUtilisateur) == 0) {
-            indexUser = i;
+            indexUtilisat = i;
             break;
         }
     }
 
     /*  retourne le livre  */
-    if (indexLivre != -1 && indexUser != -1) {
+    if (indexLivre != -1 && indexUtilisat != -1) {
         
         /*  on ne peut rendre qu'un livre qui est vraiment emprunté */
         if (inventaire[indexLivre].estEmprunte == 0) {
@@ -161,8 +161,8 @@ int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int 
         inventaire[indexLivre].dateRetour = 0;                            
         
         /* secu si nb de livres negatifs */
-        if (liste[indexUser].nbLivresActuels > 0) {  
-            liste[indexUser].nbLivresActuels = liste[indexUser].nbLivresActuels - 1;  
+        if (liste[indexUtilisat].nbLivresActuels > 0) {  
+            liste[indexUtilisat].nbLivresActuels = liste[indexUtilisat].nbLivresActuels - 1;  
         }
 
         return 1; /* Succes */
@@ -180,7 +180,7 @@ void trierLivresTitre(Livre inventaire[], int nbLivres) {
     int echanges; 
     Livre temp; 
  if (inventaire == NULL || nbLivres <= 1) {
-        return NULL;
+        return;
     }
  for (i = 0; i < nbLivres - 1; i++) {
         echanges = 0; 
@@ -205,7 +205,7 @@ void trierLivresAuteur(Livre inventaire[], int nbLivres) {
     Livre temp;
 
     if (inventaire == NULL || nbLivres <= 1) {
-        return NULL;
+        return;
     }
 
     for (i = 0; i < nbLivres - 1; i++) {
@@ -232,7 +232,7 @@ void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCibl
 
 
     if (inventaire == NULL || nbLivres <= 0 || categorieCible == NULL) {
-        return NULL; 
+        return; 
     }
 
     printf("\n=== Resultats pour la categorie : %s ===\n", categorieCible);
