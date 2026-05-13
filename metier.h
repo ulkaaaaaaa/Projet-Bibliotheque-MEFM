@@ -7,6 +7,9 @@
 /*  Poste  */
 #define ETUDIANT 0
 #define PROFESSEUR 1
+#define MAX_LIVRES_ETUDIANT 3
+#define MAX_LIVRES_PROF 5
+
 
 /*  Structure Livre */
 typedef struct {
@@ -35,13 +38,16 @@ void sauvegarderTout(Livre inventaire[], int nbL, Utilisateur liste[], int nbU);
 /* Uliana : Logique Métier */
 time_t calculerDateRetour(int role);
 int verifierRetard(time_t limite);
-int avoirDesRetard( Utilisateur u, Livre inventaire[],int nbLivres);
-void trierLivresTitre(Livre inventaire[], int n);
-int peutEmprunter(Utilisateur u, Livre inventaire[], int n);
-int traiterEmprunt(int idLivre,char loginUtilisateur[],Livre inventaire[], int nbLivres);
-int traiterRetour(int idLivre, char loginUtilisateur[],int nbLivres,Utilisateur liste[],int nbUtilisat);
-void trieLivreAuteur( Livre inventaire[], int nbLivres);
-int peutajouterLivre(Utilisateur u);
+int avoirDesRetards(Utilisateur u, Livre inventaire[], int nbLivres); 
+int peutEmprunter(Utilisateur u, Livre inventaire[], int nbLivres);
+int peutAjouterLivre(Utilisateur u); 
+int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat);
+int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat);
+
+/* Tris et recherches */
+void trierLivresTitre(Livre inventaire[], int nbLivres);
+void trierLivresAuteur(Livre inventaire[], int nbLivres); 
+void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCible[]); 
 
 
 
