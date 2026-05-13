@@ -69,31 +69,103 @@ int peutEmprunter(Utilisateur u, Livre inventaire[], int nbLivres) {
     return 1; /* Tout est bon */
 }
 
-/* Valide l'emprunt d'un livre par un utilisateur */
-void traiterEmprunt(Livre *l, Utilisateur *u) {
-    if (l == NULL || u == NULL){
-        return;  /* verif pour eviter le crash*/
+
+
+/* Valide l'emprunt d'un livre en cherchant directement dans les tableaux */
+int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat) {
+    int i;
+    int indexLivre = -1; /* pas encore trouvé */
+    int indexUser = -1;
+
+    /* verifie que les listes existent et ne sont pas vides */
+    if (inventaire == NULL || nbLivres <= 0 || liste == NULL || nbUtilisat <= 0) {
+        return 0; 
     }
 
-    l->estEmprunte = 1;  /* Le livre est pas libre */
-    strncpy(l->loginEmprunteur, u->login, sizeof(l->loginEmprunteur) - 1);  /*eviter le debordement avzc strncpy*/
-    l->loginEmprunteur[sizeof(l->loginEmprunteur) - 1] = '\0';         
-    l->dateRetour = calculerDateRetour(u->role);  
-    u->nbLivresActuels = u->nbLivresActuels + 1;  
+    /* Chercher la case du livre dans l'inventaire */
+    for (i = 0; i < nbLivres; i++) {
+        if (inventaire[i].id == idLivre) {
+            indexLivre = i; 
+            break; 
+        }
+    }
+    /*  Chercher la case de l'utilisateur dans la liste */
+    for (i = 0; i < nbUtilisat; i++) {
+        if (strcmp(liste[i].login, loginUtilisateur) == 0) {
+            indexUser = i; /* On a trouvé la case ! */
+            break;
+        }
+    }
+   /* Si on a trouve le livre  et l'utilisateur on lance l'emprunt */
+    if (indexLivre != -1 && indexUser != -1) {
+        
+        /* verifie si le livre n'est pas  pris */
+        if (inventaire[indexLivre].estEmprunte == 1) {
+            return 0; 
+
+        }
+        inventaire[indexLivre].estEmprunte = 1;  
+        
+        /* eviter le debordement avec strncpy */
+        strncpy(inventaire[indexLivre].loginEmprunteur, liste[indexUser].login, sizeof(inventaire[indexLivre].loginEmprunteur) - 1);  
+        inventaire[indexLivre].loginEmprunteur[sizeof(inventaire[indexLivre].loginEmprunteur) - 1] = '\0';         
+        
+        /* On lance le chrono */
+        inventaire[indexLivre].dateRetour = calculerDateRetour(liste[indexUser].role);  
+        liste[indexUser].nbLivresActuels = liste[indexUser].nbLivresActuels + 1;  
+
+        return 1; /* ca fonctionne */
+    }
+
+    return 0; /* Livre ou utilisateur introuvable */
 }
 
 
-void traiterRetour(Livre *l, Utilisateur *u) {
-    if (l == NULL || u == NULL){
-        return;
+/* Valide le retour d'un livre a la bibliotheque */
+int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat) {
+    int i;
+    int indexLivre = -1;
+    int indexUser = -1;
+
+    if (inventaire == NULL || nbLivres <= 0 || liste == NULL || nbUtilisat <= 0) {
+        return 0;
     }
 
-    l->estEmprunte = 0; /* Le livre est libre */
-    strcpy(l->loginEmprunteur, "");               
-    l->dateRetour = 0;                            
-    
-   
-    if (u->nbLivresActuels > 0) {  /* secu si nb de livres negatifs */
-        u->nbLivresActuels = u->nbLivresActuels - 1;  
+    /* chercher le livre */
+    for (i = 0; i < nbLivres; i++) {
+        if (inventaire[i].id == idLivre) {
+            indexLivre = i;
+            break;
+        }
     }
+
+    /* chercher l'utilisateur */
+    for (i = 0; i < nbUsers; i++) {
+        if (strcmp(liste[i].login, loginUtilisateur) == 0) {
+            indexUser = i;
+            break;
+        }
+    }
+
+    /*  retourne le livre  */
+    if (indexLivre != -1 && indexUser != -1) {
+        
+        /*  on ne peut rendre qu'un livre qui est vraiment emprunté */
+        if (inventaire[indexLivre].estEmprunte == 0) {
+            return 0; /* Echec : ce livre est déjà en rayon */
+        }
+
+        inventaire[indexLivre].estEmprunte = 0; 
+        strcpy(inventaire[indexLivre].loginEmprunteur, "");               
+        inventaire[indexLivre].dateRetour = 0;                            
+        
+        /* secu si nb de livres negatifs */
+        if (liste[indexUser].nbLivresActuels > 0) {  
+            liste[indexUser].nbLivresActuels = liste[indexUser].nbLivresActuels - 1;  
+        }
+
+        return 1; /* Succes */
+    }
+
+    return 0; /* Echec */
 }
