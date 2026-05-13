@@ -38,6 +38,12 @@ int verifierRetard(time_t limite);
 int avoirDesRetard( Utilisateur u, Livre inventaire[],int nbLivres);
 void trierLivresTitre(Livre inventaire[], int n);
 int peutEmprunter(Utilisateur u, Livre inventaire[], int n);
+int traiterEmprunt(int idLivre,char loginUtilisateur[],Livre inventaire[], int nbLivres);
+int traiterRetour(int idLivre, char loginUtilisateur[],int nbLivres,Utilisateur liste[],int nbUtilisat);
+void trieLivreAuteur( Livre inventaire[], int nbLivres);
+int peutajouterLivre(Utilisateur u);
+
+
 
 /* Jeanne : Interface et Main  */
 void afficherMenuPrincipal();
