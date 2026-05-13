@@ -169,3 +169,56 @@ int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int 
 
     return 0; /* Echec */
 }
+
+
+
+
+/* Trie le catalogue par ordre alphabétique des Titres */
+void trierLivresTitre(Livre inventaire[], int nbLivres) {
+    int i, j;
+    int echanges; 
+    Livre temp; 
+ if (inventaire == NULL || nbLivres <= 1) {
+        return;
+    }
+ for (i = 0; i < nbLivres - 1; i++) {
+        echanges = 0; 
+        for (j = 0; j < nbLivres - i - 1; j++) {
+            if (strcmp(inventaire[j].titre, inventaire[j+1].titre) > 0) {
+                temp = inventaire[j];
+                inventaire[j] = inventaire[j+1];
+                inventaire[j+1] = temp;
+                echanges = 1; 
+            }
+        }
+        if (echanges == 0) {
+            break; 
+        }
+    }
+}
+
+/* Trie le catalogue par ordre alphabétique des Auteurs */
+void trierLivresAuteur(Livre inventaire[], int nbLivres) {
+    int i, j;
+    int echanges;
+    Livre temp;
+
+    if (inventaire == NULL || nbLivres <= 1) {
+        return;
+    }
+
+    for (i = 0; i < nbLivres - 1; i++) {
+        echanges = 0;
+        for (j = 0; j < nbLivres - i - 1; j++) {
+            if (strcmp(inventaire[j].auteur, inventaire[j+1].auteur) > 0) {
+                temp = inventaire[j];
+                inventaire[j] = inventaire[j+1];
+                inventaire[j+1] = temp;
+                echanges = 1;
+            }
+        }
+        if (echanges == 0) {
+            break;
+        }
+    }
+}
