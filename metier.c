@@ -93,7 +93,7 @@ int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int
     /*  Chercher la case de l'utilisateur dans la liste */
     for (i = 0; i < nbUtilisat; i++) {
         if (strcmp(liste[i].login, loginUtilisateur) == 0) {
-            indexUtilksat = i; /* On a trouvé la case ! */
+            indexUtilisat = i; /* On a trouvé la case ! */
             break;
         }
     }
