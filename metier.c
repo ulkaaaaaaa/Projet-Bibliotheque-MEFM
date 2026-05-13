@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <time.h>
 #include <string.h> 
 #include "metier.h"
@@ -179,7 +180,7 @@ void trierLivresTitre(Livre inventaire[], int nbLivres) {
     int echanges; 
     Livre temp; 
  if (inventaire == NULL || nbLivres <= 1) {
-        return;
+        return NULL;
     }
  for (i = 0; i < nbLivres - 1; i++) {
         echanges = 0; 
@@ -204,7 +205,7 @@ void trierLivresAuteur(Livre inventaire[], int nbLivres) {
     Livre temp;
 
     if (inventaire == NULL || nbLivres <= 1) {
-        return;
+        return NULL;
     }
 
     for (i = 0; i < nbLivres - 1; i++) {
@@ -221,4 +222,40 @@ void trierLivresAuteur(Livre inventaire[], int nbLivres) {
             break;
         }
     }
+}
+
+
+/* Parcourir l'inventaire  et affiche les livres de la categorie demande */
+void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCible[]) {
+    int i;
+    int trouve = 0; /*  0 = rien trouvé, 1 = au moins un livre trouvé */
+
+
+    if (inventaire == NULL || nbLivres <= 0 || categorieCible == NULL) {
+        return NULL; 
+    }
+
+    printf("\n=== Resultats pour la categorie : %s ===\n", categorieCible);
+    
+    for (i = 0; i < nbLivres; i++) {
+        
+        if (strcmp(inventaire[i].categorie, categorieCible) == 0) {
+            printf("- ID: %d | Titre: %s | Auteur: %s ", 
+                   inventaire[i].id, inventaire[i].titre, inventaire[i].auteur);
+            
+            /* On précise s'il est dispo ou pris */
+            if (inventaire[i].estEmprunte == 1) {
+                printf("[Emprunte par %s]\n", inventaire[i].loginEmprunteur);
+            } else {
+                printf("[Disponible]\n");
+            }
+            
+            trouve = 1; /* on a trouvé*/
+        }
+    }
+
+    if (trouve == 0) {
+        printf("Desole, aucun livre trouve dans la categorie '%s'.\n", categorieCible);
+    }
+    printf("==============================================\n");
 }
