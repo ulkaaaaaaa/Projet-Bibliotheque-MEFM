@@ -1,6 +1,5 @@
 #ifndef METIER_H
 #define METIER_H
-
 #include <time.h>
 #include <string.h>
 
@@ -43,7 +42,6 @@ int peutEmprunter(Utilisateur u, Livre inventaire[], int nbLivres);
 int peutAjouterLivre(Utilisateur u); 
 int traiterEmprunt(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat);
 int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int nbLivres, Utilisateur liste[], int nbUtilisat);
-
 /* Tris et recherches */
 void trierLivresTitre(Livre inventaire[], int nbLivres);
 void trierLivresAuteur(Livre inventaire[], int nbLivres); 
