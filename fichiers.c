@@ -61,6 +61,9 @@ int chargerUtilisateurs(char nomFichier[]) {
 
       for (i = 0; < MAX_EMPRUNTS; i++) }
           tabUtilisateurs[nbUtilisateurs].emprunts[i] = -1;
+      }
+
+      for (i = 0; i < tabUtilisateurs[nbUtilisateur
 
 
           
