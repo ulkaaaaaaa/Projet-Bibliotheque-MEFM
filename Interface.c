@@ -79,17 +79,12 @@ printf("╔═══════════════════════
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 2. Rendre un livre                                                            ");
 
-    printf("\033[0m");   // retour blanc //
-    printf("║\n");
-    printf("║");
-    printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 3. Voir mes retards                                                           ");
 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[31m");  // rouge //
-    printf(" 4. Se deconnecter                                                             ");
+    printf(" 3. Se deconnecter                                                             ");
 
     printf("\033[0m"); // retour blanc //
     printf("║\n");
@@ -103,7 +98,6 @@ printf("╔═══════════════════════
 
 int deconnection(){
     int a;
-    int main() {
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
     printf("│");
     printf("\033[1;36m");  //bleu pour tout le texte//
@@ -126,7 +120,7 @@ int deconnection(){
     printf("└────────────────────────────────────────────────────────────┘\n");  
     do{
     a = saisirEntierSecurise(a);
-    }while(a != 1 || a != 2);
+    }while(a != 1 && a != 2);
     if (a == 1){
         return 1;
     } else{ 
