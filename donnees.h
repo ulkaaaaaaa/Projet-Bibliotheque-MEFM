@@ -5,7 +5,7 @@
 #define MAX_LIVRES_PROF 5
 #define MAX_LIVRES_ETUDIANT 3
 
-typdef struct {
+typedef struct {
   int id;
   char titre[100];
   char auteur[100];
@@ -22,12 +22,12 @@ typedef struct {
 } Utilisateur;
 
 extern Livre tabLivres[MAX_LIVRES];
-extern UtilisateurstabUtilisateurs[MAX_UTILISATEURS];
+extern Utilisateurs tabUtilisateurs[MAX_UTILISATEURS];
 
 extern int nbUtilisateurs;
-extern int nbUtilisatuers;
+extern int nbUtilisatuers;   //?//
 
-void initialiserBibliotheque()
+void initialiserBibliotheque();
 
 int chargerLivres(char nomFichier[]);
 int chargerUtilisateurs(char nomFichiers[]);
