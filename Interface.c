@@ -6,6 +6,8 @@ void viderbuffer() {
 }
 
 
+
+
 //pour les différents choix dans le menu//
 
 int saisirEntierSecurise() {
@@ -18,33 +20,30 @@ int saisirEntierSecurise() {
     return entier;
 }
 
+
+
+
 void menuDepart() {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
-
     printf("Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech     ");
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
-
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 1. Se connecter                                                               ");
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 2. Créer un compte                                                            ");
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[31m");  // rouge //
     printf(" 3. Quitter                                                                    ");
-
     printf("\033[0m"); // retour blanc //
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -55,6 +54,8 @@ void menuDepart() {
     return 0;
 
 }
+
+
 
 
 
@@ -62,30 +63,23 @@ void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il 
 printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
-
     printf("Nom utilisateur : %s                                                         ", &Utilisateur.nom); 
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
-
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 1. Emprunter un nouveau livre                                                 ");
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 2. Rendre un livre                                                            ");
-
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[31m");  // rouge //
     printf(" 3. Se deconnecter                                                             ");
-
     printf("\033[0m"); // retour blanc //
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -95,6 +89,8 @@ printf("╔═══════════════════════
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
     return 0;
 }
+
+
 
 int deconnection(){
     int a;
@@ -103,21 +99,23 @@ int deconnection(){
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf("          Voulez-vous vraiment vous deconnecter?            ");
     printf("\033[0m"); // retour blanc //
-    
     printf("│\n");
     printf("│");
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 1.Oui                                                      ");
-    printf("\033[0m"); // retour blanc //
-    
+    printf("\033[0m"); // retour blanc //    
     printf("│\n");
     printf("│");
     printf("\033[31m");  // rouge //
     printf(" 2.Non                                                      ");
     printf("\033[0m"); // retour blanc //
-
     printf("│\n");
-    printf("└────────────────────────────────────────────────────────────┘\n");  
+    printf("└────────────────────────────────────────────────────────────┘\n");
+    printf("\n");
+    printf("\n");
+    
+    printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
+
     do{
     a = saisirEntierSecurise(a);
     }while(a != 1 && a != 2);
@@ -128,27 +126,25 @@ int deconnection(){
     }
 }
 
+
+
+
 void emprunterlivre(){
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
-
     printf("                     Emprunter un nouveau livre                            "); 
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
-
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 1.Rechercher                                                                  ");
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte//
     printf(" 2. Voir la liste complète                                                     ");
-
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║");
@@ -162,4 +158,42 @@ void emprunterlivre(){
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
     return 0;
+}
+
+
+
+
+
+void rendrelivre(Utilisateur u) {
+
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║    ");
+    printf("\033[1;36m");
+    printf("                        Rendre un livre                                   ");
+    printf("\033[0m");
+    printf("║\n");
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+    // si l'utilisateur n'a aucun livre
+    if (u.nbEmprunts == 0) {
+        printf("║");
+        printf("\033[31m");
+        printf(" Vous n'avez aucun livre emprunté                                              ");
+        printf("\033[0m");
+        printf("║\n");
+
+    } else {
+        // afficher chaque livre emprunté
+        for (int i = 0; i < u.nbEmprunts; i++) {
+            printf("║");
+            printf("\033[1;36m");
+            printf(" %d. %-30s | %-20s | %-15s | ID: %d",bi+1, tabLivres[u.emprunts[i]].titre, tabLivres[u.emprunts[i]].auteur, tabLivres[u.emprunts[i]].categorie, u.emprunts[i]);
+            printf("\033[0m");
+            printf("║\n");
+        }
+    }
+
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("\n");
+    printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
 }
