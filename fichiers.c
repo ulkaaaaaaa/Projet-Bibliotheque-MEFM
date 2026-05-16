@@ -1,4 +1,4 @@
-#include <stdio.h>
+  #include <stdio.h>
 #include "donnees.h"
 
 int chargerLivres(char nomFichiers[]) {
@@ -63,7 +63,92 @@ int chargerUtilisateurs(char nomFichier[]) {
           tabUtilisateurs[nbUtilisateurs].emprunts[i] = -1;
       }
 
-      for (i = 0; i < tabUtilisateurs[nbUtilisateur
+      for (i = 0; i < tabUtilisateurs[nbUtilisateurs]nbEmprunts[i]);
+          fscan(fichier, ";%d", &tabUtilisateurs[nbUtilisateurs].emprunts[i]);
+      }
+
+      fscan(fichier, "\n");
+
+      nbUtilisateurs++;
+
+      retour = fscanf(fichier, "%49[^;];%49[^;];%19[^;];%d",
+                      tabUtilisateurs[nbUtilisateurs].login,
+                      tabUtilisateurs[nbUtilisateurs].motDePasse,
+                      tabUtilisateurs[nbUtilisateurs].role,
+                      &tabUtilisateurs[nbUtilisateurs].nbEmprunts);
+
+      while (retour == 4 && nbUtilisateurs < MAX_UTILSATEURS) {
+
+          for (i = 0; i < MAX_EMPRUNTS; i++) {
+              tabUtilisateurs[Utilisateurs].emprunts[i] = -1;
+          }
+
+          for (i = 0; i < tabUtilisateurs[nbUtilisateurs].nbEmprunts; i++) {
+              fscanf(fichier, ";%d", &tabUtilisateurs[nbUtilisateurs].emprunts[i]);
+          }
+
+          fscanf(fichier, "\n");
+
+          nbUtilisateurs++;
+
+          retour = fscanf(fichier, "%49[^;];%49[^;];%19[^;];%d",
+                          tabUtilisateurs[nbUtilisateurs].login,
+                          tabUtilisateurs[nbUtilisateurs].motDePasse,
+                          tabUtilisateurs[nbUtilisateurs].role, 
+                          &tabUtilisateurs[nbUtilisateurs].nbEmprunst);
+      }
+
+      fclose(fichier);
+
+      return 1;
+  }
+
+  int sauvegarderLivres(char nomFichier[]) {
+      FILE *fichier;
+      int i;
+
+      fichier = fopen(nomFichier, "w");
+
+      if (fichier == NULL) {
+          printf("Erreur : sauvegarde des livres impossible.\n");
+          return 0;
+      }
+
+      for (i = 0; i < nbLivres; i++) {
+          fprintf(fichier, "%d;%s;%s;%s;%d\n",
+                  tabLivres[i].id,
+                  tabLivres[i].tire,
+                  tabLivres[i].auteur,
+                  tabLivres[i].categorie,
+                  tabLivres[i].disponible);
+      }
+
+      fclose(fichier);
+
+      return 1;
+  }
+
+  int sauvegarderUtilisateurs(char nomFichier[]) {
+      FILE *fichier;
+      int i;
+      int j;
+
+      fichier = fopen(nomFichier, "w");
+
+      if (fichier == NULL)) {
+          fprintf(fichier, "%s;%s;%s;%d",
+                  tabUtilisateurs[i].login,
+                  tabUtilisateurs[i].motDePasse,
+                  tabUtilisateurs[i].role,
+                  tabUtilisateurs[i].nbEmprunts);
+
+        for (j = 0; j < tabUtilisateurs[i].nbEmprunts; j++) {
+            fprintf(fichier, ";%d", tab
+
+  
+      
+      
+
 
 
           
