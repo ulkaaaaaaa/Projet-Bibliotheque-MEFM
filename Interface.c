@@ -261,7 +261,7 @@ int afficherSeConnecter() {
         printf(" ▫ Identifiant : ");
         fgets(login, sizeof(login), stdin);
         if (login[strlen(login)-1] != '\n') {
-            viderTampon();
+            viderbuffer();
         }
         login[strcspn(login, "\n")] = '\0';
 
@@ -379,7 +379,36 @@ int afficherVerifDeconnection(){
 
 
 void emprunterlivre(Utilisateur u){
+    int choix;
+    int idChoisi;
+    int resultat;
+    char categorie[50];
+
     printf("\033[2J\033[H");  // efface écran 
+
+    // vérification du nombre de livre autorisé et retards 
+    if (peutEmprunter(u, tabLivres, nbLivres) == 0) {
+        printf("┌────────────────────────────────────────────────────────────┐\n");
+        printf("│")
+        if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {
+            printf("\033[31m");
+            printf("            ◬ Vous avez des livres en retard! ◬             "));
+            printf("\033[0m");
+            printf("\n");
+        } else {
+            printf("\033[31m");
+            printf("           ◬ Nombre d'emprunt maximum atteint! ◬            ");
+            printf("\033[0m");
+            printf("\n");
+        }
+        printf("│\n");
+        printf("└────────────────────────────────────────────────────────────┘\n");
+        printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+        viderTampon();
+        getchar();
+        return;        //Retourne au menu principal
+    }
+    
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"
@@ -412,6 +441,59 @@ void emprunterlivre(Utilisateur u){
     printf("\n");
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
+
+    do {
+        choix = saisirEntierSecurise();
+        if (choix < 0 || choix > 3) {
+            printf("\033[31m");
+            printf("Choix invalide.");
+            printf("\033[0m");
+            printf("\n");
+        }
+    } while (choix < 0 || choix > 3);
+
+    if (choix == 0) {    //Selectionner RETOUR donc retour au menu principal
+        return;       
+    }
+    
+    printf("\033[2J\033[H");     //efface ecran
+    if (choix == 1) {         //Tri par titre
+        trierLivresTitre(tabLivres, nbLivres);
+        afficherLivres();
+    } else if (choix == 2) {        //Tri par auteur
+        trierLivresAuteur(tabLivres, nbLivres);
+        afficherLivres();
+    } else if (choix == 3) {        //Tri par categorie
+        printf("▬▬▶ Entrez la catégorie : ");         /Choix de la categorie
+        fgets(categorie, sizeof(categorie), stdin);
+        if (categorie[strlen(categorie)-1] != '\n') {
+            viderbuffer();
+        }
+        categorie[strcspn(categorie, "\n")] = '\0';
+        rechercherParCategorie(tabLivres, nbLivres, categorie);
+    }
+
+    // saisie ID et traitement
+    printf("\n▬▬▶ Entrez l'ID du livre : ");
+    idChoisi = saisirEntierSecurise();
+
+    resultat = traiterEmprunt(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);
+
+    if (resultat == 1) {
+        printf("\033[32m");
+        printf("Emprunt effectué avec succès !");
+        printf("\033[0m");
+        printf("\n");
+    } else {
+        printf("\033[31m");
+        printf("Erreur : livre indisponible ou introuvable.");
+        printf("\033[0m");
+        printf("\n");
+    }
+
+    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderbuffer();
+    getchar();
 }
 
 
