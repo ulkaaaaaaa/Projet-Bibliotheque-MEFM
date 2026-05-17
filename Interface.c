@@ -53,7 +53,7 @@ void afficherAccueil(){
     // attendre entrée
     printf("\n\n");
     printf("▬▬▶ Appuyez sur Entrée pour continuer.");
-    viderTampon();   //Evite : utilisateur déjà appuyé sur Entrée avant d'arriver à getchar --> tampon a déjà un \n et donc pas de logo car passe toujt de suite
+    viderbuffer();   //Evite : utilisateur déjà appuyé sur Entrée avant d'arriver à getchar --> tampon a déjà un \n et donc pas de logo car passe toujt de suite
     getchar();
 }
 
@@ -91,7 +91,153 @@ void afficherMenuDepart() {
 }
 
 
+
+
 void afficherCreerCompte(){
+    char login[50];
+    char mdp[50];
+    int role;
+    int choixrole;
+    int valide;
+    int resultat;
+    int i;
+
+    printf("\033[2J\033[H");  // efface écran 
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║    ");
+    printf("\033[1;36m");
+    printf("                        Créer un compte                                   ");
+    printf("\033[0m");
+    printf("║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+ 
+    do {         // boucle globale : recommence si identifiant déjà pris
+        resultat = 0;
+
+        // boucle identifiant
+        do {
+            valide = 1;
+            printf(" ▫ Identifiant (entre 4 et 20 caractères) : ");
+            fgets(login, sizeof(login), stdin);
+            if (login[strlen(login)-1] != '\n') {
+                viderbuffer();  // vide le reste si trop long
+            }
+            login[strcspn(login, "\n")] = '\0';
+
+            if (strlen(login) < 4 || strlen(login) > 20) {
+                printf("\033[31m");    //rouge
+                printf("Erreur");
+                printf("\033[0m");    //retour blanc
+                sleep(1);    //attendre 1 seconde
+                printf("\033[1A\033[2K");     //Remonte le curseur d'une ligne vers le haut
+                printf("\033[1A\033[2K");        //Efface toute la ligne où est le curseur
+                valide = 0;
+                continue;
+            }
+                
+            for (i = 0; i < strlen(login); i++) {     //Securisation des caracteres entrés
+                if (!isprint(login[i])) {
+                    printf("\033[31mErreur : caractère interdit.\033[0m\n");
+                    sleep(1);
+                    printf("\033[1A\033[2K");    //Remonte le curseur d'une ligne vers le haut
+                    printf("\033[1A\033[2K");        //Efface toute la ligne où est le curseur
+                    valide = 0;
+                    break;
+                }
+            }
+        } while (valide == 0);
+
+        // boucle mot de passe
+        do {
+            valide = 1;
+            printf(" ▫ Mot de passe (entre 4 et 20 caractères) : ");
+            fgets(mdp, sizeof(mdp), stdin);
+            if (mdp[strlen(mdp)-1] != '\n') {
+                viderbuffer();  // vide le reste si trop long
+            }
+            mdp[strcspn(mdp, "\n")] = '\0';
+
+            if (strlen(mdp) < 4 || strlen(mdp) > 20) {            
+                printf("\033[31mErreur : entre 4 et 20 caractères.\033[0m\n");
+                sleep(1);
+                printf("\033[1A\033[2K");   //Remonte le curseur d'une ligne vers le haut
+                printf("\033[1A\033[2K");        //Efface toute la ligne où est le curseur
+                valide = 0;
+                continue;
+            }
+
+            for (i = 0; i < strlen(mdp); i++) {               //Securisation des caracteres entrés
+                if (!isprint(mdp[i])) {
+                    printf("\033[31mErreur : caractère interdit.\033[0m\n");
+                    sleep(1);
+                    printf("\033[1A\033[2K");   //Remonte le curseur d'une ligne vers le haut
+                    printf("\033[1A\033[2K");        //Efface toute la ligne où est le curseur
+                    valide = 0;
+                    break;
+                }
+            }
+        } while (valide == 0);
+
+        // choix du rôle
+        printf("\n");
+        printf("\033[1;36m");
+        printf(" ▫ Choix du rôle :  1. Etudiant  ou  2. Professeur \n");
+        printf("\033[0m");
+        printf("\n");
+        do {
+            choixrole = saisirEntierSecurise();
+            if (choix != 1 && choix != 2) {                   //Securisation du choix
+                printf("\033[31mErreur : tapez 1 ou 2.\033[0m\n");
+                sleep(1);
+                printf("\033[1A\033[2K");
+                printf("\033[1A\033[2K");
+            }
+        } while (choixrole != 1 && choixrole != 2);   
+
+        if (choixrole == 1) {
+            role = 0;   // étudiant
+        } else {
+            role = 1;   // professeur
+        }
+
+        resultat = creerCompte(login, mdp, role);
+
+        // si identifiant déjà pris : effacer et recommencer depuis le début
+        if (resultat == 0) {
+            printf("\033[31m");
+            printf("Erreur : identifiant déjà pris ou liste pleine.\n");
+            printf(" Recommencez.");
+            printf("\033[0m");
+            printf("\n");
+            sleep(2);
+            printf("\033[2J\033[H");
+            printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+            printf("║    ");
+            printf("\033[1;36m");
+            printf("                        Créer un compte                                   ");
+            printf("\033[0m");
+            printf("║\n");
+            printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+            printf("\n");
+        }
+
+    } while (resultat == 0);
+
+    printf("\033[32m");
+    printf("Votre compte a été créé avec succès ");
+    printf("%s", login);
+    printf("!");
+    printf("\033[0m");
+    printf("\n");
+    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderbuffer();
+    getchar();
+}
+
+
+
+
+
 
 
 void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il en est//
