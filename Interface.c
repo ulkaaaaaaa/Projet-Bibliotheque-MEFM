@@ -59,6 +59,10 @@ void afficherAccueil(){
 
 
 
+
+
+
+
 void afficherMenuDepart() {
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
@@ -237,61 +241,123 @@ void afficherCreerCompte(){
 
 
 
+int afficherSeConnecter() {
+    char login[50];
+    char mdp[50];
+    int index;
 
-
-
-void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il en est//
-    printf("\033[2J\033[H");  // efface écran 
+    printf("\033[2J\033[H");
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
-    printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
-    printf("Nom utilisateur : %s                                                         ", &Utilisateur.nom); 
+    printf("\033[1;36m");
+    printf("                          Se connecter                                    ");
+    printf("\033[0m");
+    printf("║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("\n");
+
+    do {           //on vérifie, la combinaison entre le mot de passe et l'identifiant
+        // saisie de l'identifiant
+        printf(" ▫ Identifiant : ");
+        fgets(login, sizeof(login), stdin);
+        if (login[strlen(login)-1] != '\n') {
+            viderTampon();
+        }
+        login[strcspn(login, "\n")] = '\0';
+
+        // saisie mot de passe
+        printf(" ▫ Mot de passe : ");
+        fgets(mdp, sizeof(mdp), stdin);
+        if (mdp[strlen(mdp)-1] != '\n') {
+            viderTampon();
+        }
+        mdp[strcspn(mdp, "\n")] = '\0';
+
+        // vérification combinaison
+        index = authentifier(login, mdp);
+
+        if (index == -1) {
+            printf("\033[31m");
+            printf("Identifiants incorrects.");
+            printf(" Réessayez.");
+            printf("\033[0m");
+            printf("\n");
+            sleep(1);
+            printf("\033[1A\033[2K");  // efface erreur
+            printf("\033[1A\033[2K");  // efface mdp
+            printf("\033[1A\033[2K");  // efface login
+        }
+
+    } while (index == -1);
+
+    printf("\033[32m");
+    printf("Connexion réussie ! Bonjour ");
+    printf("%s", login);
+    printf(".");
+    printf("\033[0m");
+    printf("\n");
+
+    return index;
+}
+
+
+
+
+void afficherMenuPrincipal(Utilisateur u) {    // Utilisateur choix : emprunt, retour, savoir où il en est//
+    printf("\033[2J\033[H");  // efface écran 
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("\033[1;36m");  //bleu pour tout le texte 
+    printf("                                 Menu Principal                                  "); 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("║    ");
+    printf("\033[1;36m");  //bleu pour tout le texte 
+    printf("Nom utilisateur : %s", &u.login); 
+    printf("\033[0m");   // retour blanc 
+    printf("║\n");
     printf("║");
-    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf("\033[1;36m");  //bleu pour tout le texte
     printf(" 1. Emprunter un nouveau livre                                                 ");
-    printf("\033[0m");   // retour blanc //
+    printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
-    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf("\033[1;36m");  //bleu pour tout le texte
     printf(" 2. Rendre un livre                                                            ");
-    printf("\033[0m");   // retour blanc //
+    printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
-    printf("\033[31m");  // rouge //
+    printf("\033[31m");  // rouge 
     printf(" 3. Se deconnecter                                                             ");
-    printf("\033[0m"); // retour blanc //
+    printf("\033[0m"); // retour blanc 
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
     printf("\n");
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
-    return 0;
 }
 
 
 
-int deconnection(){
-    printf("\033[2J\033[H");  // efface écran 
+int afficherVerifDeconnection(){
     int a;
+    printf("\033[2J\033[H");  // efface écran 
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
     printf("│");
-    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf("\033[1;36m");  //bleu pour tout le texte
     printf("          Voulez-vous vraiment vous deconnecter?            ");
-    printf("\033[0m"); // retour blanc //
+    printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("│");
-    printf("\033[1;36m");  //bleu pour tout le texte//
+    printf("\033[1;36m");  //bleu pour tout le texte
     printf(" 1.Oui                                                      ");
-    printf("\033[0m"); // retour blanc //    
+    printf("\033[0m"); // retour blanc  
     printf("│\n");
     printf("│");
-    printf("\033[31m");  // rouge //
+    printf("\033[31m");  // rouge 
     printf(" 2.Non                                                      ");
-    printf("\033[0m"); // retour blanc //
+    printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("└────────────────────────────────────────────────────────────┘\n");
     printf("\n");
