@@ -62,8 +62,8 @@ int creerCompte(char[], char motDePasse[], char role[]){
   strcpy(tabUtilisateurs[nbUtilisateurs].role, role);
 
   tabUtilisateurs[nbUtilisateurs].nbEmprunts = 0;
-  for (j = 0; < MAX_EMPRUNTS; j++) {
-    tabUtilisateursnbUtilisateurs].emprunts[j] = -1;
+  for (j = 0; j < MAX_EMPRUNTS; j++) {
+    tabUtilisateurs[nbUtilisateurs].emprunts[j] = -1;
   }
 
   nbUtilisateurs++;
@@ -80,7 +80,7 @@ void afficherLivres() {
           tabLivres[i].id,
           tabLivres[i].titre,
           tabLivres[i].auteur,
-          tabLivres[i].categrie);
+          tabLivres[i].categorie);
    
     if (tabLivres[i].disponible == 1) {
       printf("Disponible\n");
