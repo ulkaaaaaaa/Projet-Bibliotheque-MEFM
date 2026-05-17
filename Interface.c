@@ -577,9 +577,11 @@ void afficherRendreLivre(Utilisateur u) {
         getchar();
         return;     //retour au menu principal
     }
+    printf("║");
     printf("\033[1m");
     printf(" N° | %-30s | %-20s | %-15s | ID  ", "Titre", "Auteur", "Categorie");   //affichage numérotation | titre | auteur | categorie | ID
     printf("\033[0m");
+    printf("║\n");
     for (i = 0; i < u.nbLivresActuels; i++) {       // afficher chaque livre emprunté
         printf("║");
         printf("\033[1m");
