@@ -1,6 +1,11 @@
 #include <stdio.h>
-#include <unistd.h>   //pour les pauses entre les points pour la fonction
-
+#include <string.h>    // pour strlen, strcspn, strcmp
+#include <ctype.h>     // pour isprint
+#include <unistd.h>    // pour sleep et usleep : pour les pauses entre les points pour la fonction
+#include <time.h>      // pour ctime dans afficherStatusUtilisateur
+#include "donnees.h"
+#include "metier.h"
+#include "interface.h"
 
 //retirer les valeures restantes//
 
