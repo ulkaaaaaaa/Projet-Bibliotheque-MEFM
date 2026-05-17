@@ -27,7 +27,7 @@ int saisirEntierSecurise() {
 
 
 void afficherAccueil(){
-      
+    printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║                                ");
     printf("\033[1;36m");
@@ -53,15 +53,14 @@ void afficherAccueil(){
     // attendre entrée
     printf("\n\n");
     printf("▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderTampon();   //Evite : utilisateur déjà appuyé sur Entrée avant d'arriver à getchar --> tampon a déjà un \n et donc pas de logo car passe toujt de suite
     getchar();
-
-    // effacer avant menuDepart
-    printf("\033[2J\033[H");
 }
 
 
 
 void menuDepart() {
+    printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
@@ -89,8 +88,6 @@ void menuDepart() {
     printf("\n");
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
-    return 0;
-
 }
 
 
@@ -98,7 +95,8 @@ void menuDepart() {
 
 
 void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il en est//
-printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("\033[2J\033[H");  // efface écran 
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
     printf("Nom utilisateur : %s                                                         ", &Utilisateur.nom); 
@@ -131,6 +129,7 @@ printf("╔═══════════════════════
 
 
 int deconnection(){
+    printf("\033[2J\033[H");  // efface écran 
     int a;
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
     printf("│");
@@ -168,6 +167,7 @@ int deconnection(){
 
 
 void emprunterlivre(){
+    printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
@@ -203,7 +203,7 @@ void emprunterlivre(){
 
 
 void rendrelivre(Utilisateur u) {
-
+    printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");
