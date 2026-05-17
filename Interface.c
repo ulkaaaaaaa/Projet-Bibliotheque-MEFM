@@ -41,8 +41,7 @@ void afficherAccueil(){
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     
-    // chargement  ...//
-    printf("\nChargement");
+    printf("\nChargement");         // chargement  ...
     fflush(stdout);
     for (int i = 0; i < 7; i++) {
         usleep(300000);
@@ -50,15 +49,65 @@ void afficherAccueil(){
         fflush(stdout);
     }
 
-    // attendre entrée
-    printf("\n\n");
+    printf("\n\n");     // attendre entrée
     printf("▬▬▶ Appuyez sur Entrée pour continuer.");
     viderbuffer();   //Evite : utilisateur déjà appuyé sur Entrée avant d'arriver à getchar --> tampon a déjà un \n et donc pas de logo car passe toujt de suite
     getchar();
 }
 
 
+void afficherStatusUtilisateur(Utilisateur u) {
+    int i;
+    printf("\033[2J\033[H");
+    printf("┌────────────────────────────────────────────────────────────────────────────────┐\n");
+    printf("│    ");
+    printf("\033[1;36m");     //bleu
+    printf("                      Vos livres en cours                                  ");
+    printf("\033[0m");
+    printf("│\n");
+    printf("├────────────────────────────────────────────────────────────────────────────────┤\n");
 
+    if (u.nbLivresActuels == 0) {
+        printf("│");
+        printf("\033[32m");     //vert
+        printf("    Aucun livre emprunté                                                        ");
+        printf("\033[0m");
+        printf("│\n");
+
+    } else {
+
+        if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {       // message retard 
+            printf("│");
+            printf("\033[31m");     //rouge
+            printf("   ◬ Attention : vous avez des livres en retard !                             ");
+            printf("\033[0m");
+            printf("│\n");
+            printf("├────────────────────────────────────────────────────────────────────────────────┤\n");
+        }
+
+        for (i = 0; i < nbLivres; i++) {             // liste des livres
+            if (tabLivres[i].estEmprunte == 1 && strcmp(tabLivres[i].loginEmprunteur, u.login) == 0) {
+                printf("│");
+
+                if (verifierRetard(tabLivres[i].dateRetour) == 1) {
+                    printf("\033[31m");   // rouge si en retard
+                } else {
+                    printf("\033[1;36m"); // cyan si dans les temps
+                }
+
+                printf(" %-30s | Retour avant : %s",
+                       tabLivres[i].titre,
+                       ctime(&tabLivres[i].dateRetour));
+                printf("\033[0m");
+            }
+        }
+    }
+
+    printf("└────────────────────────────────────────────────────────────────────────────────┘\n");
+    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderbuffer();
+    getchar();
+}
 
 
 
