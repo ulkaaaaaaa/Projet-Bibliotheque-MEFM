@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <unistd.h>   //pour les pauses entre les points pour la fonction
+
+
 //retirer les valeures restantes//
 
 void viderbuffer() {
@@ -20,6 +24,40 @@ int saisirEntierSecurise() {
     return entier;
 }
 
+
+
+void afficherAccueil(){
+      
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                                ");
+    printf("\033[1;36m");
+    printf("CY-biblioTECH                                  ");   //bleu pour tout le texte + gras avec "1"//
+    printf("\033[0m");   // retour blanc //
+    printf("║\n");
+    printf("║                         ");
+    printf("\033[1;36m");
+    printf("Bibliothèque universitaire                            ");
+    printf("\033[0m"); // retour blanc //
+    printf("║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    
+    // chargement  ...//
+    printf("\nChargement");
+    fflush(stdout);
+    for (int i = 0; i < 7; i++) {
+        usleep(300000);
+        printf(".");
+        fflush(stdout);
+    }
+
+    // attendre entrée
+    printf("\n\n");
+    printf("▬▬▶ Appuyez sur Entrée pour continuer.");
+    getchar();
+
+    // effacer avant menuDepart
+    printf("\033[2J\033[H");
+}
 
 
 
