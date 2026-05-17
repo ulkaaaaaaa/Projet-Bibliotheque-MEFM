@@ -41,3 +41,101 @@ int main() {
 
     return 0;
 }
+
+//Avant main de Youssef, on peut retirer?
+
+
+#include <stdio.h>
+#include <string.h>
+#include "donnees.h"
+#include "metier.h"
+#include "interface.h"
+
+int main() {
+    int choixDepart;
+    int choixPrincipal;
+    int indiceUtilisateur;
+    int deconnecte;
+    int ok;
+
+    
+    initialiserBibliotheque();          // chargement des données avec vérification
+
+    ok = chargerLivres("livres.txt");
+    if (ok == 0) {
+        printf("\033[31m");
+        printf("Erreur : chargement des livres impossible.");
+        printf("\033[0m");
+        printf("\n");
+        return 1;  // quitte le programme 
+    }
+
+    ok = chargerUtilisateurs("utilisateurs.txt");
+    if (ok == 0) {
+        printf("\033[31m");       //rouge
+        printf("Erreur : chargement des utilisateurs impossible.");
+        printf("\033[0m");
+        printf("\n");
+        return 1;  // quitte le programme 
+    }
+
+    afficherAccueil();         // logo de démarrage
+
+    do {            // boucle menu départ
+        afficherMenuDepart();            
+
+        do {
+            choixDepart = saisirEntierSecurise();
+            if (choixDepart < 1 || choixDepart > 3) {
+                printf("\033[31m");       //rouge
+                printf("Choix invalide.");
+                printf("\033[0m");
+                printf("\n");
+            }
+        } while (choixDepart < 1 || choixDepart > 3);
+
+        if (choixDepart == 1) {
+
+            indiceUtilisateur = afficherSeConnecter();
+            afficherStatusUtilisateur(tabUtilisateurs[indiceUtilisateur]);
+
+            deconnecte = 0;
+            do {
+                afficherMenuPrincipal(tabUtilisateurs[indiceUtilisateur]);
+
+                do {
+                    choixPrincipal = saisirEntierSecurise();
+                    if (choixPrincipal < 1 || choixPrincipal > 3) {
+                        printf("\033[31m");       //rouge
+                        printf("Choix invalide.");
+                        printf("\033[0m");
+                        printf("\n");
+                    }
+                } while (choixPrincipal < 1 || choixPrincipal > 3);
+
+                if (choixPrincipal == 1) {
+                    afficherEmprunterLivre(tabUtilisateurs[indiceUtilisateur]);
+                } else if (choixPrincipal == 2) {
+                    afficherRendreLivre(tabUtilisateurs[indiceUtilisateur]);
+                } else if (choixPrincipal == 3) {
+                    if (afficherVerifDeconnection() == 2) {
+                        deconnecte = 1;
+                    }
+                }
+
+            } while (deconnecte == 0);
+
+        } else if (choixDepart == 2) {
+            afficherCreerCompte();
+        }
+
+    } while (choixDepart != 3);
+
+    // sauvegarde avant de quitter
+    sauvegarderLivres("livres.txt");
+    sauvegarderUtilisateurs("utilisateurs.txt");
+
+    afficherAccueil();
+
+    return 0;
+}
