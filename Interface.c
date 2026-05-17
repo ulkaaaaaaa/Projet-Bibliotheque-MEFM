@@ -224,7 +224,7 @@ void afficherCreerCompte(){
     } while (resultat == 0);
 
     printf("\033[32m");
-    printf("Votre compte a été créé avec succès ");
+    printf("\nVotre compte a été créé avec succès ");
     printf("%s", login);
     printf("!");
     printf("\033[0m");
