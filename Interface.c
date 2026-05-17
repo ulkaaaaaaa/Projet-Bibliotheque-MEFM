@@ -306,6 +306,7 @@ int afficherSeConnecter() {
 void afficherMenuPrincipal(Utilisateur u) {    // Utilisateur choix : emprunt, retour, savoir où il en est//
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte 
     printf("                                 Menu Principal                                  "); 
     printf("\033[0m");   // retour blanc //
@@ -523,7 +524,7 @@ void afficherRendreLivre(Utilisateur u) {
         printf("║\n");
         printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
         printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
-        viderBuffer();
+        viderbuffer();
         getchar();
         return;     //retour au menu principal
     }
@@ -583,7 +584,7 @@ void afficherRendreLivre(Utilisateur u) {
     }
 
     printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
-    viderBuffer();
+    viderbuffer();
     getchar();
 }
 
