@@ -190,7 +190,7 @@ void afficherCreerCompte(){
         printf("\n");
         do {
             choixrole = saisirEntierSecurise();
-            if (choix != 1 && choix != 2) {                   //Securisation du choix
+            if (choixrole != 1 && choixrole != 2) {                   //Securisation du choix
                 printf("\033[31mErreur : tapez 1 ou 2.\033[0m\n");
                 sleep(1);
                 printf("\033[1A\033[2K");
@@ -269,7 +269,7 @@ int afficherSeConnecter() {
         printf(" ▫ Mot de passe : ");
         fgets(mdp, sizeof(mdp), stdin);
         if (mdp[strlen(mdp)-1] != '\n') {
-            viderTampon();
+            viderbuffer();
         }
         mdp[strcspn(mdp, "\n")] = '\0';
 
@@ -313,7 +313,7 @@ void afficherMenuPrincipal(Utilisateur u) {    // Utilisateur choix : emprunt, r
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte 
-    printf("Nom utilisateur : %s", &u.login); 
+    printf("Nom utilisateur : %s", u.login); 
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
@@ -389,10 +389,10 @@ void afficherEmprunterLivre(Utilisateur u){
     // vérification du nombre de livre autorisé et retards 
     if (peutEmprunter(u, tabLivres, nbLivres) == 0) {
         printf("┌────────────────────────────────────────────────────────────┐\n");
-        printf("│")
+        printf("│");
         if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {
             printf("\033[31m");        //rouge
-            printf("            ◬ Vous avez des livres en retard! ◬             "));
+            printf("            ◬ Vous avez des livres en retard! ◬             ");
             printf("\033[0m");
             printf("\n");
         } else {
@@ -404,7 +404,7 @@ void afficherEmprunterLivre(Utilisateur u){
         printf("│\n");
         printf("└────────────────────────────────────────────────────────────┘\n");
         printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
-        viderTampon();
+        viderbuffer();
         getchar();
         return;        //Retourne au menu principal
     }
@@ -464,7 +464,7 @@ void afficherEmprunterLivre(Utilisateur u){
         trierLivresAuteur(tabLivres, nbLivres);
         afficherLivres();
     } else if (choix == 3) {        //Tri par categorie
-        printf("▬▬▶ Entrez la catégorie : ");         /Choix de la categorie
+        printf("▬▬▶ Entrez la catégorie : ");         //Choix de la categorie
         fgets(categorie, sizeof(categorie), stdin);
         if (categorie[strlen(categorie)-1] != '\n') {
             viderbuffer();
@@ -479,7 +479,7 @@ void afficherEmprunterLivre(Utilisateur u){
 
     resultat = traiterEmprunt(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);
     printf("┌────────────────────────────────────────────────────────────┐\n");
-    printf("│"
+    printf("│");
     if (resultat == 1) {
         printf("\033[32m");    //vert
         printf("                Emprunt effectué avec succès !              ");
@@ -527,11 +527,12 @@ void afficherRendreLivre(Utilisateur u) {
         getchar();
         return;     //retour au menu principal
     }
-    
+    printf("\033[1m");
+    printf(" N° | %-30s | %-20s | %-15s | ID  ", "Titre", "Auteur", "Categorie");   //affichage numérotation | titre | auteur | categorie | ID
+    printf("\033[0m");
     for (i = 0; i < u.nbLivresActuels; i++) {       // afficher chaque livre emprunté
         printf("║");
         printf("\033[1m");
-        printf(" N° | %-30s | %-20s | %-15s | ID  ", "Titre", "Auteur", "Categorie");   //affichage numérotation | titre | auteur | categorie | ID
         printf(" %d. %-30s | %-20s | %-15s | ID: %d", i+1, tabLivres[u.emprunts[i]].titre, tabLivres[u.emprunts[i]].auteur, tabLivres[u.emprunts[i]].categorie, u.emprunts[i]);
         printf("\033[0m");
         printf("║\n");
@@ -585,4 +586,4 @@ void afficherRendreLivre(Utilisateur u) {
     viderBuffer();
     getchar();
 }
-}
+
