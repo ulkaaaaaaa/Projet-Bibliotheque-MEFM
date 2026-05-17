@@ -395,7 +395,7 @@ void afficherMenuPrincipal(Utilisateur u) {    // Utilisateur choix : emprunt, r
 
 
 
-int afficherVerifDeconnection(){
+int afficherVerifDeconnexion(){
     int a;
     printf("\033[2J\033[H");  // efface écran 
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
