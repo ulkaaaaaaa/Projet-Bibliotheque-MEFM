@@ -118,7 +118,7 @@ int main() {
                 } else if (choixPrincipal == 2) {
                     afficherRendreLivre(tabUtilisateurs[indiceUtilisateur]);
                 } else if (choixPrincipal == 3) {
-                    if (afficherVerifDeconnection() == 2) {
+                    if (afficherVerifDeconnexion() == 2) {
                         deconnecte = 1;
                     }
                 }
