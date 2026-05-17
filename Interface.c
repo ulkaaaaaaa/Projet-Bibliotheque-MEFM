@@ -351,12 +351,12 @@ int afficherVerifDeconnection(){
     printf("│\n");
     printf("│");
     printf("\033[1;36m");  //bleu pour tout le texte
-    printf(" 1.Oui                                                      ");
+    printf(" 1.Non                                                      ");
     printf("\033[0m"); // retour blanc  
     printf("│\n");
     printf("│");
     printf("\033[31m");  // rouge 
-    printf(" 2.Non                                                      ");
+    printf(" 2.Oui                                                      ");
     printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("└────────────────────────────────────────────────────────────┘\n");
@@ -366,7 +366,7 @@ int afficherVerifDeconnection(){
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
 
     do{
-    a = saisirEntierSecurise(a);
+    a = saisirEntierSecurise();
     }while(a != 1 && a != 2);
     if (a == 1){
         return 1;
