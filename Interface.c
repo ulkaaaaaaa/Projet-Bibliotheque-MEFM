@@ -473,23 +473,24 @@ void emprunterlivre(Utilisateur u){
         rechercherParCategorie(tabLivres, nbLivres, categorie);
     }
 
-    // saisie ID et traitement
-    printf("\n▬▬▶ Entrez l'ID du livre : ");
+    printf("\n");
+    printf("\n▬▬▶ Entrez l'ID du livre : ");           // saisie ID et traitement
     idChoisi = saisirEntierSecurise();
 
     resultat = traiterEmprunt(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);
-
+    printf("┌────────────────────────────────────────────────────────────┐\n");
+    printf("│"
     if (resultat == 1) {
         printf("\033[32m");    //vert
-        printf("Emprunt effectué avec succès !");
+        printf("                Emprunt effectué avec succès !              ");
         printf("\033[0m");
-        printf("\n");
     } else {
         printf("\033[31m");     //rouge
-        printf("Erreur : livre indisponible ou introuvable.");
+        printf("         Erreur : livre indisponible ou introuvable.        ");
         printf("\033[0m");
-        printf("\n");
     }
+    printf("│\n");
+    printf("└────────────────────────────────────────────────────────────┘\n");
 
     printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
     viderbuffer();
