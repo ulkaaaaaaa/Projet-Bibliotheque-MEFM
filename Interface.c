@@ -378,7 +378,7 @@ int afficherVerifDeconnection(){
 
 
 
-void emprunterlivre(Utilisateur u){
+void afficherEmprunterLivre(Utilisateur u){
     int choix;
     int idChoisi;
     int resultat;
@@ -501,7 +501,7 @@ void emprunterlivre(Utilisateur u){
 
 
 
-void rendrelivre(Utilisateur u) {
+void afficherRendreLivre(Utilisateur u) {
     int idChoisi;
     int resultat;
     int i;
@@ -539,7 +539,6 @@ void rendrelivre(Utilisateur u) {
 
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
-    printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
 
     do {          // saisie sécurisée de l'ID
         printf("▬▬▶ Entrez l'ID du livre à rendre : ");
