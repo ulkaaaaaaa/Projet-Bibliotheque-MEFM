@@ -59,7 +59,7 @@ void afficherAccueil(){
 
 
 
-void menuDepart() {
+void afficherMenuDepart() {
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
@@ -91,7 +91,7 @@ void menuDepart() {
 }
 
 
-
+void afficherCreerCompte(){
 
 
 void menuPrincipal() {    // Utilisateur choix : emprunt, retour, savoir où il en est//
