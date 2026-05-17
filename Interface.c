@@ -391,12 +391,12 @@ void emprunterlivre(Utilisateur u){
         printf("┌────────────────────────────────────────────────────────────┐\n");
         printf("│")
         if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {
-            printf("\033[31m");
+            printf("\033[31m");        //rouge
             printf("            ◬ Vous avez des livres en retard! ◬             "));
             printf("\033[0m");
             printf("\n");
         } else {
-            printf("\033[31m");
+            printf("\033[31m");         //rouge
             printf("           ◬ Nombre d'emprunt maximum atteint! ◬            ");
             printf("\033[0m");
             printf("\n");
