@@ -378,36 +378,40 @@ int afficherVerifDeconnection(){
 
 
 
-void emprunterlivre(){
+void emprunterlivre(Utilisateur u){
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
-    printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
+    printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"
     printf("                     Emprunter un nouveau livre                            "); 
-    printf("\033[0m");   // retour blanc //
+    printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
-    printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 1.Rechercher                                                                  ");
-    printf("\033[0m");   // retour blanc //
+    printf("\033[1;36m");  //bleu pour tout le texte
+    printf(" 1. Rechercher par titre                                                        ");
+    printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
-    printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 2. Voir la liste complète                                                     ");
-    printf("\033[0m");   // retour blanc //
+    printf("\033[1;36m");  //bleu pour tout le texte
+    printf(" 2. Rechercher par auteur                                                     ");
+    printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
-    printf("\033[1;36m");  //bleu pour tout le texte//
-    printf(" 3. Quitter                                                                    ");
-    printf("\033[0m"); // retour blanc //
+    printf("\033[1;36m");  //bleu pour tout le texte
+    printf(" 3. Rechercher par catégorie                                                  ");
+    printf("\033[0m");   // retour blanc 
+    printf("║\n");
+    printf("║");
+    printf("\033[1;36m");  //bleu pour tout le texte
+    printf(" 0. Quitter                                                                    ");
+    printf("\033[0m"); // retour blanc 
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
     printf("\n");
 
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
-    return 0;
 }
 
 
