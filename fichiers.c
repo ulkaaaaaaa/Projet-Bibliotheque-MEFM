@@ -1,102 +1,83 @@
-  #include <stdio.h>
+#include <stdio.h>
 #include "donnees.h"
 
 int chargerLivres(char nomFichiers[]) {
-  FILE *fichiers;
-  int retour;
+    FILE *fichiers;
+    int retour;
 
-  fichier = fopen(nomFichier, "r");
+    fichier = fopen(nomFichier, "r");
 
-  if (fichier == NULL) {
-     printf("Erreur : ouverture du fichier livres impossible.\n");
-     return 0;
-  }
+    if (fichier == NULL) {
+        printf("Erreur : ouverture du fichier livres impossible.\n");
+        return 0;
+    }
 
-  nbLivres = 0;
+    nbLivres = 0;
 
-  retour = fscanf(fichier, "%d;99[^;];%99[^;];%49[^;];%d\n",
-                  &tabLivres[nbLivres].id,
-                  tabLivres[nbLivres].titre,
-                  tabLivres[nbLivres].auteur,
-                  tabLivres[nbLivres].categorie,
-                  &tabLivres[nbLivres].disponible);
+    retour = fscanf(fichier, "%d;99[^;];%99[^;];%49[^;];%d\n",
+                    &tabLivres[nbLivres].id,
+                    tabLivres[nbLivres].titre,
+                    tabLivres[nbLivres].auteur,
+                    tabLivres[nbLivres].categorie,
+                    &tabLivres[nbLivres].disponible);
 
-  while (retour == 5 && nbLivres < MAX_LIVRES) {
-      nbLivres++;
+    while (retour == 5 && nbLivres < MAX_LIVRES) {
+        nbLivres++;
 
-      retour = fscan(fichier, "%d;99[^;];%99[^;];%49[^;];%d\n",  
-                     &tabLivres[nbLivres].id,
-                     tabLivres[nbLivres].titre,
-                     tabLivres[nbLivres].auteur,
-                     tabLivres[nbLivres].categorie,
-                     &tabLivres[nbLivres].disponible);
-  }
+        retour = fscan(fichier, "%d;99[^;];%99[^;];%49[^;];%d\n",  
+                       &tabLivres[nbLivres].id,
+                       tabLivres[nbLivres].titre,
+                       tabLivres[nbLivres].auteur,
+                       tabLivres[nbLivres].categorie,
+                       &tabLivres[nbLivres].disponible);
+    }
 
-  fclose(fichier);
+    fclose(fichier);
 
-  return 1;
+    return 1;
 }
 
 int chargerUtilisateurs(char nomFichier[]) {
-  FILE *fichier;
-  int retour;
-  int i;
+    FILE *fichier;
+    int retour;
+    int i;
 
-  fichier = fopen(nomFichier, "r");
+    fichier = fopen(nomFichier, "r");
 
-  if (fichier == NULL) {
-      printf("Erreur : ouverture du fichier utilisateurs impossible.\n");
-      return 0;
-  }
+    if (fichier == NULL) {
+        printf("Erreur : ouverture du fichier utilisateurs impossible.\n");
+        return 0;
+    }
 
-  nbUtilisateurs = 0;
+    nbUtilisateurs = 0;
 
-  retour = fscan(fichier, "%49[^;];%49[^;];%19[^;];%d",
-                 tabUtilisateurs[nbUtilisateurs].login,
-                 tabUtilisateirs[nbUtilisateurs].motDePasse,
-                 tabUtilisateurs[nbUtilisateurs].role,
-                 &tabUtilisateurs[nbUtilisateurs].nbEmprunts);
+    retour = fscan(fichier, "%49[^;];%49[^;];%19[^;];%d",
+                   tabUtilisateurs[nbUtilisateurs].login,
+                   tabUtilisateirs[nbUtilisateurs].motDePasse,
+                   tabUtilisateurs[nbUtilisateurs].role,
+                   &tabUtilisateurs[nbUtilisateurs].nbEmprunts);
 
-  while (retour == 4 && nbUtilisateurs < MAX_UTILISATEURS) {
+    while (retour == 4 && nbUtilisateurs < MAX_UTILISATEURS) {
 
-      for (i = 0; < MAX_EMPRUNTS; i++) }
-          tabUtilisateurs[nbUtilisateurs].emprunts[i] = -1;
-      }
+        for (i = 0; < MAX_EMPRUNTS; i++) }
+            tabUtilisateurs[nbUtilisateurs].emprunts[i] = -1;
+        }
 
-      for (i = 0; i < tabUtilisateurs[nbUtilisateurs]nbEmprunts[i]);
-          fscan(fichier, ";%d", &tabUtilisateurs[nbUtilisateurs].emprunts[i]);
-      }
+        for (i = 0; i < tabUtilisateurs[nbUtilisateurs]nbEmprunts[i]);
+            fscan(fichier, ";%d", &tabUtilisateurs[nbUtilisateurs].emprunts[i]);
+        }
 
-      fscan(fichier, "\n");
+        fscan(fichier, "\n");
 
-      nbUtilisateurs++;
+        nbUtilisateurs++;
 
-      retour = fscanf(fichier, "%49[^;];%49[^;];%19[^;];%d",
-                      tabUtilisateurs[nbUtilisateurs].login,
-                      tabUtilisateurs[nbUtilisateurs].motDePasse,
-                      tabUtilisateurs[nbUtilisateurs].role,
-                      &tabUtilisateurs[nbUtilisateurs].nbEmprunts);
+        retour = fscanf(fichier, "%49[^;];%49[^;];%19[^;];%d",
+                        tabUtilisateurs[nbUtilisateurs].login,
+                        tabUtilisateurs[nbUtilisateurs].motDePasse,
+                        tabUtilisateurs[nbUtilisateurs].role,
+                        &tabUtilisateurs[nbUtilisateurs].nbEmprunts);
 
-      while (retour == 4 && nbUtilisateurs < MAX_UTILSATEURS) {
-
-          for (i = 0; i < MAX_EMPRUNTS; i++) {
-              tabUtilisateurs[Utilisateurs].emprunts[i] = -1;
-          }
-
-          for (i = 0; i < tabUtilisateurs[nbUtilisateurs].nbEmprunts; i++) {
-              fscanf(fichier, ";%d", &tabUtilisateurs[nbUtilisateurs].emprunts[i]);
-          }
-
-          fscanf(fichier, "\n");
-
-          nbUtilisateurs++;
-
-          retour = fscanf(fichier, "%49[^;];%49[^;];%19[^;];%d",
-                          tabUtilisateurs[nbUtilisateurs].login,
-                          tabUtilisateurs[nbUtilisateurs].motDePasse,
-                          tabUtilisateurs[nbUtilisateurs].role, 
-                          &tabUtilisateurs[nbUtilisateurs].nbEmprunst);
-      }
+    }
 
       fclose(fichier);
 
@@ -136,14 +117,28 @@ int chargerUtilisateurs(char nomFichier[]) {
       fichier = fopen(nomFichier, "w");
 
       if (fichier == NULL)) {
+          fprintf("Erreur : sauvegarde des utilisateurs impossible.\n")
+          return 0;
+      }
+
+      for(i = 0; i < nbUtilisateurs; i++) {
           fprintf(fichier, "%s;%s;%s;%d",
                   tabUtilisateurs[i].login,
                   tabUtilisateurs[i].motDePasse,
                   tabUtilisateurs[i].role,
                   tabUtilisateurs[i].nbEmprunts);
 
-        for (j = 0; j < tabUtilisateurs[i].nbEmprunts; j++) {
-            fprintf(fichier, ";%d", tab
+          for (j = 0; j < tabUtilisateurs[i].nbEmprunts; j++) {
+              fprintf(fichier, ";%d", tabUtilisateurs[i].emprunts[j]);
+          {
+
+          fprintf(fichier, "\n");
+      {
+
+      fclose(fichier);
+
+      return 1;
+  {
 
   
       
