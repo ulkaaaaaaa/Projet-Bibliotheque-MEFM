@@ -480,12 +480,12 @@ void emprunterlivre(Utilisateur u){
     resultat = traiterEmprunt(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);
 
     if (resultat == 1) {
-        printf("\033[32m");
+        printf("\033[32m");    //vert
         printf("Emprunt effectué avec succès !");
         printf("\033[0m");
         printf("\n");
     } else {
-        printf("\033[31m");
+        printf("\033[31m");     //rouge
         printf("Erreur : livre indisponible ou introuvable.");
         printf("\033[0m");
         printf("\n");
@@ -501,6 +501,10 @@ void emprunterlivre(Utilisateur u){
 
 
 void rendrelivre(Utilisateur u) {
+    int idChoisi;
+    int resultat;
+    int i;
+    
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
@@ -510,26 +514,75 @@ void rendrelivre(Utilisateur u) {
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
 
-    // si l'utilisateur n'a aucun livre
-    if (u.nbEmprunts == 0) {
+    if (u.nbLivresActuels == 0) {    // si l'utilisateur n'a aucun livre
         printf("║");
-        printf("\033[31m");
-        printf(" Vous n'avez aucun livre emprunté                                              ");
+        printf("\033[32m");       //vert
+        printf("    Vous n'avez aucun livre emprunté.                                          ");
         printf("\033[0m");
         printf("║\n");
-
-    } else {
-        // afficher chaque livre emprunté
-        for (int i = 0; i < u.nbEmprunts; i++) {
-            printf("║");
-            printf("\033[1;36m");
-            printf(" %d. %-30s | %-20s | %-15s | ID: %d",bi+1, tabLivres[u.emprunts[i]].titre, tabLivres[u.emprunts[i]].auteur, tabLivres[u.emprunts[i]].categorie, u.emprunts[i]);
-            printf("\033[0m");
-            printf("║\n");
-        }
+        printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+        printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+        viderBuffer();
+        getchar();
+        return;     //retour au menu principal
+    }
+    
+    for (i = 0; i < u.nbLivresActuels; i++) {       // afficher chaque livre emprunté
+        printf("║");
+        printf("\033[1m");
+        printf(" N° | %-30s | %-20s | %-15s | ID  ", "Titre", "Auteur", "Categorie");   //affichage numérotation | titre | auteur | categorie | ID
+        printf(" %d. %-30s | %-20s | %-15s | ID: %d", i+1, tabLivres[u.emprunts[i]].titre, tabLivres[u.emprunts[i]].auteur, tabLivres[u.emprunts[i]].categorie, u.emprunts[i]);
+        printf("\033[0m");
+        printf("║\n");
     }
 
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
+
+    do {          // saisie sécurisée de l'ID
+        printf("▬▬▶ Entrez l'ID du livre à rendre : ");
+        idChoisi = saisirEntierSecurise();
+        resultat = 0;       // vérifier que l'ID appartient bien à l'utilisateur et non à un autre
+        for (i = 0; i < u.nbLivresActuels; i++) {
+            if (u.emprunts[i] == idChoisi) {
+                resultat = 1;
+                break;
+            }
+        }
+        if (resultat == 0) {
+            printf("┌────────────────────────────────────────────────────────────┐\n");
+            printf("│");
+            printf("\033[31m");            //rouge
+            printf("   Cet ID ne correspond pas à un de vos livres.             ");
+            printf("\033[0m");
+            printf("│\n");
+            printf("└────────────────────────────────────────────────────────────┘\n");
+        }
+     } while (resultat == 0);
+
+    resultat = traiterRetour(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);          // traitement du retour               
+
+    if (resultat == 1) {
+        printf("┌────────────────────────────────────────────────────────────┐\n");
+        printf("│");
+        printf("\033[32m");              //vert
+        printf("              Livre rendu avec succès !                      ");
+        printf("\033[0m");
+        printf("│\n");
+        printf("└────────────────────────────────────────────────────────────┘\n");
+    } else {
+        printf("┌────────────────────────────────────────────────────────────┐\n");
+        printf("│");
+        printf("\033[31m");         //rouge
+        printf("         Erreur : livre introuvable ou déjà rendu.           ");
+        printf("\033[0m");
+        printf("│\n");
+        printf("└────────────────────────────────────────────────────────────┘\n");
+    }
+
+    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderBuffer();
+    getchar();
+}
 }
