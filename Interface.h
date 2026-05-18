@@ -14,8 +14,7 @@ void afficherMenuPrincipal(Utilisateur u);        //choix entre emprunter/rendre
 int afficherVerifDeconnexion();            //verification de deconnexion
 void afficherEmprunterLivre(Utilisateur u);            //choix entre rechercher par titre/auteur/catégorie ou retour au menu principal
 void afficherRendreLivre(Utilisateur u);        //affichage des livres à rendre
-/* ajouter*/
-void afficherAjouterLivre(Utilisateur u);
+void afficherAjouterLivre(Utilisateur u);      //pour qu'un prof ajoute un nouveau livre
 
 #endif
 
