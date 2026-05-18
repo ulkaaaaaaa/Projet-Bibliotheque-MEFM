@@ -10,25 +10,27 @@ Utilisateur tabUtilisateurs[MAX_UTILISATEURS];
 int nbLivres = 0;
 int nbUtilisateurs = 0;
 
-/*initialisation et compte */
+/* initialisation et compte */
 
-void initialiserBibliotheque(){
+void initialiserBibliotheque() {
     nbLivres = 0;
     nbUtilisateurs = 0;
 
-    for (int i = 0; i < MAX_LIVRES; i++){
+    for (int i = 0; i < MAX_LIVRES; i++) {
         tabLivres[i].id = 0;
         tabLivres[i].estEmprunte = 0; 
         tabLivres[i].dateRetour = 0;
         strcpy(tabLivres[i].loginEmprunteur, "");
     }
-    for (i = 0; i < MAX_UTILISATEURS; i++){
+    
+    // Correction : ajout du type 'int' pour 'i'
+    for (int i = 0; i < MAX_UTILISATEURS; i++) {
         tabUtilisateurs[i].nbLivresActuels = 0;
     }
 }
 
-int authentifier(char login[], char motDePasse[]){
-    for (int i = 0; i < nbUtilisateurs; i++){
+int authentifier(char login[], char motDePasse[]) {
+    for (int i = 0; i < nbUtilisateurs; i++) {
         if (strcmp(tabUtilisateurs[i].login, login) == 0 &&
             strcmp(tabUtilisateurs[i].mdp, motDePasse) == 0) { 
             return i; 
@@ -37,8 +39,7 @@ int authentifier(char login[], char motDePasse[]){
     return -1; 
 }
 
-int creerCompte(char login[], char motDePasse[], int role){
-  
+int creerCompte(char login[], char motDePasse[], int role) {
     if(nbUtilisateurs >= MAX_UTILISATEURS) return 0;
     if (role != ETUDIANT && role != PROFESSEUR) return 0; 
 
@@ -60,7 +61,6 @@ int creerCompte(char login[], char motDePasse[], int role){
 }
 
 void afficherUtilisateurs() {
-    
     printf("\n========== ANNUAIRE DES UTILISATEURS ==========\n");
     if (nbUtilisateurs == 0) {
         printf("Aucun utilisateur n'est inscrit pour le moment.\n===============================================\n");
@@ -99,7 +99,6 @@ int ajouterLivre(char titre[], char auteur[], char categorie[]) {
 }
 
 void afficherLivres() {
-  
     printf("\n--- Liste des livres ---\n");
     if (nbLivres == 0) {
         printf("La bibliotheque est vide pour le moment.\n");
@@ -111,5 +110,3 @@ void afficherLivres() {
         else printf("Emprunte\n");
     }
 }
-
-
