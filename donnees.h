@@ -38,6 +38,7 @@ extern int nbUtilisateurs;
 
 /* Fonction de youssef */
 void initialiserBibliotheque();
+int ajouterLivre(char titre[],char auteur[],char categorie[]);
 int chargerLivres(char nomFichier[]);
 int chargerUtilisateurs(char nomFichier[]);
 int sauvegarderLivres(char nomFichier[]);
@@ -46,6 +47,7 @@ int authentifier(char login[], char motDePasse[]);
 int creerCompte(char login[], char motDePasse[], int role);
 void afficherLivres();
 void afficherUtilisateurs();
+
 
 
 /* fonction uliana */
