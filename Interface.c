@@ -374,6 +374,15 @@ void afficherMenuPrincipal(Utilisateur u) {
     printf(" 3. Se deconnecter                                                             ");
     printf("\033[0m"); // retour blanc 
     printf("║\n");
+    
+    if (u.role == PROFESSEUR) {  // Si prof : ajout d'un livre possible
+        printf("║");
+        printf("\033[1;33m");  // Jaune
+        printf(" 4. Ajouter un livre au catalogue                                             ");
+        printf("\033[0m");   
+        printf("║\n");
+    }
+    
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
     printf("\n");
@@ -635,61 +644,7 @@ void afficherRendreLivre(Utilisateur u) {
 }
 
 
-
-
-
-
-/*nouveau menu  */
-
-void afficherMenuPrincipal(Utilisateur u) {    
-    printf("\033[2J\033[H");  // efface écran 
-    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    printf("║");
-    printf("\033[1;36m");  
-    printf("                                 Menu Principal                                  "); 
-    printf("\033[0m");   
-    printf("║\n");
-    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    printf("║    ");
-    printf("\033[1;36m");  
-    printf("Nom utilisateur : %s", u.login); 
-    printf("\033[0m");   
-    printf("║\n");
-    printf("║");
-    printf("\033[1;36m");  
-    printf(" 1. Emprunter un nouveau livre                                                 ");
-    printf("\033[0m");   
-    printf("║\n");
-    printf("║");
-    printf("\033[1;36m");  
-    printf(" 2. Rendre un livre                                                            ");
-    printf("\033[0m");   
-    printf("║\n");
-    printf("║");
-    printf("\033[31m");  // rouge 
-    printf(" 3. Se deconnecter                                                             ");
-    printf("\033[0m"); 
-    printf("║\n");
-
-    /* AJOUT : Si c'est un professeur, on affiche l'option magique */
-    if (u.role == PROFESSEUR) {
-        printf("║");
-        printf("\033[1;33m");  // Jaune
-        printf(" 4. [Prof] Ajouter un livre au catalogue                                       ");
-        printf("\033[0m");   
-        printf("║\n");
-    }
-
-    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    printf("▬▬▶ Entrer le chiffre correspondant à votre demande.\n");
-}
-
-
-
-/* ajouter a la fin et voir explocation envoyer */
-
-
-void afficherAjouterLivre(Utilisateur u) {
+void afficherAjouterLivre(Utilisateur u) {          //prof peut ajouter un livre
     char titre[100];
     char auteur[100];
     char categorie[50];
@@ -704,15 +659,16 @@ void afficherAjouterLivre(Utilisateur u) {
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
 
-    /* 1. Sécurité : On revérifie avec TON code s'il a le droit */
-    if (peutAjouterLivre(u) == 0) {
-        printf("\033[31mErreur : Seuls les professeurs peuvent ajouter des livres.\033[0m\n");
-        sleep(2);
+    
+    if (peutAjouterLivre(u) == 0) {       //Sécurité pour çetre sur que c'est un prof
+        printf("\033[31m");     //rouge
+        printf("Erreur : Seuls les professeurs peuvent ajouter des livres.\n");
+        printf("\033[0m");
+        sleep(2);       //attente 2secondes puis sors du menu
         return;
     }
 
-    /* 2. Saisie des informations */
-    printf(" ▫ Titre du livre : ");
+    printf(" ▫ Titre du livre : ");        //Le prof npeut entrer les différentes infos
     fgets(titre, sizeof(titre), stdin);
     titre[strcspn(titre, "\n")] = '\0';
 
@@ -724,15 +680,18 @@ void afficherAjouterLivre(Utilisateur u) {
     fgets(categorie, sizeof(categorie), stdin);
     categorie[strcspn(categorie, "\n")] = '\0';
 
-    /* 3. On envoie les données à Youssef pour qu'il les mette dans le tableau */
-    resultat = ajouterLivre(titre, auteur, categorie);
+    resultat = ajouterLivre(titre, auteur, categorie);         //ajout du livre dans la bibliothèque
 
     printf("\n┌────────────────────────────────────────────────────────────┐\n");
     printf("│");
     if (resultat == 1) {
-        printf("\033[32m               Livre ajouté avec succès !                     \033[0m");
+        printf("\033[32m");              //vert
+        printf("               Livre ajouté avec succès !                     ");
+        printf("\033[0m");
     } else {
-        printf("\033[31m         Erreur : La bibliothèque est pleine.                 \033[0m");
+        printf("\033[31m");      //rouge
+        printf("         Erreur : La bibliothèque est pleine.                 ");
+        printf("\033[0m");
     }
     printf("│\n");
     printf("└────────────────────────────────────────────────────────────┘\n");
@@ -741,4 +700,8 @@ void afficherAjouterLivre(Utilisateur u) {
     viderbuffer();
     getchar();
 }
+
+
+
+
 
