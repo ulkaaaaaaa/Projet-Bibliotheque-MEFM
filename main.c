@@ -10,14 +10,9 @@ int main() {
     int deconnecte;
     int ok;
     
-    /* ========================================================
-       1. DEMARRAGE DE LA MEMOIRE (Tableaux de Youssef)
-       ======================================================== */
     initialiserBibliotheque();          
 
-    /* ========================================================
-       2. CHARGEMENT DES FICHIERS TEXTES 
-       ======================================================== */
+  
     ok = chargerLivres("livres.txt");
     if (ok == 0) {
         printf("\033[33m"); /* Texte en Jaune */
@@ -32,30 +27,28 @@ int main() {
         printf("\033[0m");
     }
 
-    /* ========================================================
-       3. LANCEMENT DE L'INTERFACE VISUELLE (Menus de Jeanne)
-       ======================================================== */
+    /* lancement de l'interface */
     afficherAccueil();         
 
-    /* BOUCLE NIVEAU 1 : Menu d'accueil (Connexion / Inscription) */
+    /* Menu d'accueil (Connexion / Inscription) */
     do {            
         afficherMenuDepart();            
 
         do {
             choixDepart = saisirEntierSecurise();
             if (choixDepart < 1 || choixDepart > 3) {
-                printf("\033[31mChoix invalide.\033[0m\n"); /* Texte en Rouge */
+                printf("\033[31mChoix invalide.\033[0m\n");
             }
         } while (choixDepart < 1 || choixDepart > 3);
 
         if (choixDepart == 1) {
-            /* --- CONNEXION --- */
+            /* connexion*/
             indiceUtilisateur = afficherSeConnecter();
             afficherStatusUtilisateur(tabUtilisateurs[indiceUtilisateur]);
 
             deconnecte = 0;
             
-            /* BOUCLE NIVEAU 2 : Menu de l'utilisateur connecte */
+            /* Menu de l'utilisateur connecte */
             do {
                 afficherMenuPrincipal(tabUtilisateurs[indiceUtilisateur]);
 
@@ -79,15 +72,13 @@ int main() {
             } while (deconnecte == 0);
 
         } else if (choixDepart == 2) {
-            /* --- CREATION DE COMPTE --- */
+            /* creer un compte */
             afficherCreerCompte();
         }
 
     } while (choixDepart != 3); /* 3 = Quitter */
 
-    /* ========================================================
-       4. FERMETURE ET SAUVEGARDE FINALE
-       ======================================================== */
+    /* fermeture et sauvegarde finale */
     sauvegarderLivres("livres.txt");
     sauvegarderUtilisateurs("utilisateurs.txt");
 
