@@ -1,0 +1,2 @@
+etudiant1;1234;etudiant;0
+prof1;abcd;professeur;0
