@@ -1,54 +1,6 @@
 #include <stdio.h>
-#include "donnees.h"
-
-int main() {
-    int ok;
-    int indice;
-
-    initialiserBibliotheque();
-
-    ok = chargerLivres("livres.txt");
-    if (ok == 0) {
-        printf("Chargelent des livres impossible.\n");
-    }
-
-    ok = chargerUtilisateurs("utilisateurs.txt");
-    if (ok == 0) {
-        printf("Chargement des utilisateurs impossible.\n");
-    }
-
-    afficherLivres();
-    afficherUtilisateurs();
-
-    indice = authentifier("etudiant1", "1234");
-
-    if (indice != -1) {
-        printf("\nConnesion reussie : %s\n", tabUtilisateurs[indice].login);
-    } else {
-        printf("\nLogin ou mot de passe incorrect.\n");
-    }
-
-    ok = creerCompte("nouveau", "0000", "etudiant");
-
-    if (ok == 1) {
-        printf("\nCompte cree avec succes.\n");
-    } else{
-        printf("\nCreation du compte impossible.\n");
-    }
-
-    sauvegarderUtilisateurs("utilisateurs.txt");
-    sauvegarderLivres("livres.txt");
-
-    return 0;
-}
-
-//Avant main de Youssef, on peut retirer?
-
-
-#include <stdio.h>
 #include <string.h>
 #include "donnees.h"
-#include "metier.h"
 #include "interface.h"
 
 int main() {
@@ -57,59 +9,60 @@ int main() {
     int indiceUtilisateur;
     int deconnecte;
     int ok;
-
     
-    initialiserBibliotheque();          // chargement des données avec vérification
+    /* ========================================================
+       1. DEMARRAGE DE LA MEMOIRE (Tableaux de Youssef)
+       ======================================================== */
+    initialiserBibliotheque();          
 
+    /* ========================================================
+       2. CHARGEMENT DES FICHIERS TEXTES 
+       ======================================================== */
     ok = chargerLivres("livres.txt");
     if (ok == 0) {
-        printf("\033[31m");
-        printf("Erreur : chargement des livres impossible.");
+        printf("\033[33m"); /* Texte en Jaune */
+        printf("Info : Fichier livres.txt introuvable. Demarrage avec un catalogue vide.\n");
         printf("\033[0m");
-        printf("\n");
-        return 1;  // quitte le programme 
     }
 
     ok = chargerUtilisateurs("utilisateurs.txt");
     if (ok == 0) {
-        printf("\033[31m");       //rouge
-        printf("Erreur : chargement des utilisateurs impossible.");
+        printf("\033[33m"); /* Texte en Jaune */
+        printf("Info : Fichier utilisateurs.txt introuvable. Demarrage avec un registre vide.\n");
         printf("\033[0m");
-        printf("\n");
-        return 1;  // quitte le programme 
     }
 
-    afficherAccueil();         // logo de démarrage
+    /* ========================================================
+       3. LANCEMENT DE L'INTERFACE VISUELLE (Menus de Jeanne)
+       ======================================================== */
+    afficherAccueil();         
 
-    do {            // boucle menu départ
+    /* BOUCLE NIVEAU 1 : Menu d'accueil (Connexion / Inscription) */
+    do {            
         afficherMenuDepart();            
 
         do {
             choixDepart = saisirEntierSecurise();
             if (choixDepart < 1 || choixDepart > 3) {
-                printf("\033[31m");       //rouge
-                printf("Choix invalide.");
-                printf("\033[0m");
-                printf("\n");
+                printf("\033[31mChoix invalide.\033[0m\n"); /* Texte en Rouge */
             }
         } while (choixDepart < 1 || choixDepart > 3);
 
         if (choixDepart == 1) {
-
+            /* --- CONNEXION --- */
             indiceUtilisateur = afficherSeConnecter();
             afficherStatusUtilisateur(tabUtilisateurs[indiceUtilisateur]);
 
             deconnecte = 0;
+            
+            /* BOUCLE NIVEAU 2 : Menu de l'utilisateur connecte */
             do {
                 afficherMenuPrincipal(tabUtilisateurs[indiceUtilisateur]);
 
                 do {
                     choixPrincipal = saisirEntierSecurise();
                     if (choixPrincipal < 1 || choixPrincipal > 3) {
-                        printf("\033[31m");       //rouge
-                        printf("Choix invalide.");
-                        printf("\033[0m");
-                        printf("\n");
+                        printf("\033[31mChoix invalide.\033[0m\n");
                     }
                 } while (choixPrincipal < 1 || choixPrincipal > 3);
 
@@ -118,7 +71,7 @@ int main() {
                 } else if (choixPrincipal == 2) {
                     afficherRendreLivre(tabUtilisateurs[indiceUtilisateur]);
                 } else if (choixPrincipal == 3) {
-                    if (afficherVerifDeconnexion() == 2) {
+                    if (afficherVerifDeconnexion() == 2) { /* 2 correspond a "Oui" */
                         deconnecte = 1;
                     }
                 }
@@ -126,16 +79,22 @@ int main() {
             } while (deconnecte == 0);
 
         } else if (choixDepart == 2) {
+            /* --- CREATION DE COMPTE --- */
             afficherCreerCompte();
         }
 
-    } while (choixDepart != 3);
+    } while (choixDepart != 3); /* 3 = Quitter */
 
-    // sauvegarde avant de quitter
+    /* ========================================================
+       4. FERMETURE ET SAUVEGARDE FINALE
+       ======================================================== */
     sauvegarderLivres("livres.txt");
     sauvegarderUtilisateurs("utilisateurs.txt");
 
-    afficherAccueil();
+    /* Petit message de fin avec ecran nettoye */
+    printf("\033[2J\033[H"); 
+    printf("\033[32mSauvegarde effectuee. Au revoir et a bientot !\033[0m\n\n");
 
     return 0;
 }
+
