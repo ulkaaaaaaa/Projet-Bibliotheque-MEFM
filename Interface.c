@@ -639,7 +639,7 @@ void afficherRendreLivre(Utilisateur u) {
 
 
 
-/*nouveau */
+/*nouveau menu  */
 
 void afficherMenuPrincipal(Utilisateur u) {    
     printf("\033[2J\033[H");  // efface écran 
@@ -682,5 +682,63 @@ void afficherMenuPrincipal(Utilisateur u) {
 
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
     printf("▬▬▶ Entrer le chiffre correspondant à votre demande.\n");
+}
+
+
+
+/* ajouter a la fin et voir explocation envoyer */
+
+
+void afficherAjouterLivre(Utilisateur u) {
+    char titre[100];
+    char auteur[100];
+    char categorie[50];
+    int resultat;
+
+    printf("\033[2J\033[H"); // efface écran 
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║    ");
+    printf("\033[1;33m"); // Jaune
+    printf("                    Espace Professeur : Ajouter un livre                       ");
+    printf("\033[0m");
+    printf("║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+
+    /* 1. Sécurité : On revérifie avec TON code s'il a le droit */
+    if (peutAjouterLivre(u) == 0) {
+        printf("\033[31mErreur : Seuls les professeurs peuvent ajouter des livres.\033[0m\n");
+        sleep(2);
+        return;
+    }
+
+    /* 2. Saisie des informations */
+    printf(" ▫ Titre du livre : ");
+    fgets(titre, sizeof(titre), stdin);
+    titre[strcspn(titre, "\n")] = '\0';
+
+    printf(" ▫ Auteur : ");
+    fgets(auteur, sizeof(auteur), stdin);
+    auteur[strcspn(auteur, "\n")] = '\0';
+
+    printf(" ▫ Catégorie : ");
+    fgets(categorie, sizeof(categorie), stdin);
+    categorie[strcspn(categorie, "\n")] = '\0';
+
+    /* 3. On envoie les données à Youssef pour qu'il les mette dans le tableau */
+    resultat = ajouterLivre(titre, auteur, categorie);
+
+    printf("\n┌────────────────────────────────────────────────────────────┐\n");
+    printf("│");
+    if (resultat == 1) {
+        printf("\033[32m               Livre ajouté avec succès !                     \033[0m");
+    } else {
+        printf("\033[31m         Erreur : La bibliothèque est pleine.                 \033[0m");
+    }
+    printf("│\n");
+    printf("└────────────────────────────────────────────────────────────┘\n");
+
+    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderbuffer();
+    getchar();
 }
 
