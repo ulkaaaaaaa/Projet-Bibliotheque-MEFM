@@ -27,7 +27,7 @@ int saisirEntierSecurise() {
 }
 
 
-void afficherAccueil(){
+void afficherAccueil() {
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║                                ");
@@ -35,7 +35,7 @@ void afficherAccueil(){
     printf("CY-biblioTECH                                  ");   //bleu pour tout le texte + gras avec "1"//
     printf("\033[0m");   // retour blanc //
     printf("║\n");
-    printf("║                         ");
+    printf("║                          ");
     printf("\033[1;36m");
     printf("Bibliothèque universitaire                            ");
     printf("\033[0m"); // retour blanc //
@@ -63,7 +63,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
     printf("┌────────────────────────────────────────────────────────────────────────────────┐\n");
     printf("│    ");
     printf("\033[1;36m");     //bleu
-    printf("                      Vos livres en cours                                  ");
+    printf("                      Vos livres en cours                                ");
     printf("\033[0m");
     printf("│\n");
     printf("├────────────────────────────────────────────────────────────────────────────────┤\n");
@@ -71,7 +71,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
     if (u.nbLivresActuels == 0) {
         printf("│");
         printf("\033[32m");     //vert
-        printf("    Aucun livre emprunté                                                        ");
+        printf("   Aucun livre emprunté                                                        ");
         printf("\033[0m");
         printf("│\n");
 
@@ -80,7 +80,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
         if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {       // message retard 
             printf("│");
             printf("\033[31m");     //rouge
-            printf("   ◬ Attention : vous avez des livres en retard !                             ");
+            printf("   ◬ Attention : vous avez des livres en retard !                              ");
             printf("\033[0m");
             printf("│\n");
             printf("├────────────────────────────────────────────────────────────────────────────────┤\n");
@@ -143,7 +143,7 @@ void afficherMenuDepart() {
 }
 
 
-void afficherCreerCompte(){
+void afficherCreerCompte() {
     char login[50];
     char mdp[50];
     int role;
@@ -216,7 +216,7 @@ void afficherCreerCompte(){
                 continue;
             }
 
-            for (i = 0; i < strlen(mdp); i++) {               
+            for (i = 0; i < strlen(mdp); i++) {                
                 if (!isprint(mdp[i])) {
                     printf("\033[31mErreur : caractère interdit.\033[0m\n");
                     sleep(1);
@@ -236,7 +236,7 @@ void afficherCreerCompte(){
         printf("\n");
         do {
             choixrole = saisirEntierSecurise();
-            if (choixrole != 1 && choixrole != 2) {                   
+            if (choixrole != 1 && choixrole != 2) {                    
                 printf("\033[31mErreur : tapez 1 ou 2.\033[0m\n");
                 sleep(1);
                 printf("\033[1A\033[2K");
@@ -300,7 +300,7 @@ int afficherSeConnecter() {
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
 
-    do {           
+    do {            
         // saisie de l'identifiant
         printf(" ▫ Identifiant : ");
         fgets(login, sizeof(login), stdin);
@@ -382,23 +382,23 @@ void afficherMenuPrincipal(Utilisateur u) {
 }
 
 
-int afficherVerifDeconnexion(){
+int afficherVerifDeconnexion() {
     int a;
     printf("\033[2J\033[H");  // efface écran 
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
     printf("│");
     printf("\033[1;36m");  //bleu pour tout le texte
-    printf("          Voulez-vous vraiment vous deconnecter?            ");
+    printf("          Voulez-vous vraiment vous deconnecter?             ");
     printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("│");
     printf("\033[1;36m");  //bleu pour tout le texte
-    printf(" 1.Non                                                      ");
+    printf(" 1.Non                                                       ");
     printf("\033[0m"); // retour blanc  
     printf("│\n");
     printf("│");
     printf("\033[31m");  // rouge 
-    printf(" 2.Oui                                                      ");
+    printf(" 2.Oui                                                       ");
     printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("└────────────────────────────────────────────────────────────┘\n");
@@ -407,18 +407,19 @@ int afficherVerifDeconnexion(){
     
     printf("▬▬▶Entrer le chiffre correspondant à votre demande.\n");
 
-    do{
-    a = saisirEntierSecurise();
-    }while(a != 1 && a != 2);
-    if (a == 1){
+    do {
+        a = saisirEntierSecurise();
+    } while (a != 1 && a != 2);
+    
+    if (a == 1) {
         return 1;
-    } else{ 
+    } else { 
         return 0;
     }
 }
 
 
-void afficherEmprunterLivre(Utilisateur u){
+void afficherEmprunterLivre(Utilisateur u) {
     int choix;
     int idChoisi;
     int resultat;
@@ -437,7 +438,7 @@ void afficherEmprunterLivre(Utilisateur u){
             printf("\n");
         } else {
             printf("\033[31m");         //rouge
-            printf("           ◬ Nombre d'emprunt maximum atteint! ◬            ");
+            printf("           ◬ Nombre d'emprunt maximum atteint! ◬             ");
             printf("\033[0m");
             printf("\n");
         }
@@ -452,23 +453,23 @@ void afficherEmprunterLivre(Utilisateur u){
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"
-    printf("                     Emprunter un nouveau livre                            "); 
+    printf("                      Emprunter un nouveau livre                             "); 
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte
-    printf(" 1. Rechercher par titre                                                        ");
+    printf(" 1. Rechercher par titre                                                       ");
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte
-    printf(" 2. Rechercher par auteur                                                     ");
+    printf(" 2. Rechercher par auteur                                                      ");
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte
-    printf(" 3. Rechercher par catégorie                                                  ");
+    printf(" 3. Rechercher par catégorie                                                   ");
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
@@ -493,7 +494,7 @@ void afficherEmprunterLivre(Utilisateur u){
     } while (choix < 0 || choix > 3);
 
     if (choix == 0) {    //Selectionner RETOUR donc retour au menu principal
-        return;       
+        return;        
     }
     
     printf("\033[2J\033[H");     //efface ecran
@@ -554,8 +555,8 @@ void afficherRendreLivre(Utilisateur u) {
 
     if (u.nbLivresActuels == 0) {    // si l'utilisateur n'a aucun livre
         printf("║");
-        printf("\033[32m");       //vert
-        printf("    Vous n'avez aucun livre emprunté.                                          ");
+        printf("\033[32m");        //vert
+        printf("   Vous n'avez aucun livre emprunté.                                           ");
         printf("\033[0m");
         printf("║\n");
         printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -608,13 +609,13 @@ void afficherRendreLivre(Utilisateur u) {
         }
      } while (resultat == 0);
 
-    resultat = traiterRetour(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);          // traitement du retour               
+    resultat = traiterRetour(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);          // traitement du retour                
 
     if (resultat == 1) {
         printf("┌────────────────────────────────────────────────────────────┐\n");
         printf("│");
         printf("\033[32m");              //vert
-        printf("              Livre rendu avec succès !                      ");
+        printf("              Livre rendu avec succès !                     ");
         printf("\033[0m");
         printf("│\n");
         printf("└────────────────────────────────────────────────────────────┘\n");
@@ -632,4 +633,3 @@ void afficherRendreLivre(Utilisateur u) {
     viderbuffer();
     getchar();
 }
-
