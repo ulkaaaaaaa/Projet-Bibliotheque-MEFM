@@ -633,3 +633,54 @@ void afficherRendreLivre(Utilisateur u) {
     viderbuffer();
     getchar();
 }
+
+
+
+
+
+
+/*nouveau */
+
+void afficherMenuPrincipal(Utilisateur u) {    
+    printf("\033[2J\033[H");  // efface écran 
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║");
+    printf("\033[1;36m");  
+    printf("                                 Menu Principal                                  "); 
+    printf("\033[0m");   
+    printf("║\n");
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("║    ");
+    printf("\033[1;36m");  
+    printf("Nom utilisateur : %s", u.login); 
+    printf("\033[0m");   
+    printf("║\n");
+    printf("║");
+    printf("\033[1;36m");  
+    printf(" 1. Emprunter un nouveau livre                                                 ");
+    printf("\033[0m");   
+    printf("║\n");
+    printf("║");
+    printf("\033[1;36m");  
+    printf(" 2. Rendre un livre                                                            ");
+    printf("\033[0m");   
+    printf("║\n");
+    printf("║");
+    printf("\033[31m");  // rouge 
+    printf(" 3. Se deconnecter                                                             ");
+    printf("\033[0m"); 
+    printf("║\n");
+
+    /* AJOUT : Si c'est un professeur, on affiche l'option magique */
+    if (u.role == PROFESSEUR) {
+        printf("║");
+        printf("\033[1;33m");  // Jaune
+        printf(" 4. [Prof] Ajouter un livre au catalogue                                       ");
+        printf("\033[0m");   
+        printf("║\n");
+    }
+
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+    printf("▬▬▶ Entrer le chiffre correspondant à votre demande.\n");
+}
+
