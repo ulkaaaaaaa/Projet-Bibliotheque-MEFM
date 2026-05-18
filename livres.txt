@@ -1,1 +1,5 @@
-
+1;L Etranger;Albert Camus;1
+2;L Odyssee;Homere;1
+3;Medee;Euripide;1
+4;Hamlet;William Shakespear;1
+5;Madame Bovary;Gustave Flaubert;1
