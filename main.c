@@ -89,3 +89,43 @@ int main() {
     return 0;
 }
 
+
+
+
+
+
+            /* remplacer BOUCLE NIVEAU 2 : Menu de l'utilisateur connecte */
+            do {
+                afficherMenuPrincipal(tabUtilisateurs[indiceUtilisateur]);
+
+                do {
+                    choixPrincipal = saisirEntierSecurise();
+                    
+                    /* Sécurité : On adapte la limite du choix (3 pour etudiant, 4 pour prof) */
+                    int limiteMax = (tabUtilisateurs[indiceUtilisateur].role == PROFESSEUR) ? 4 : 3;
+                    
+                    if (choixPrincipal < 1 || choixPrincipal > limiteMax) {
+                        printf("\033[31mChoix invalide.\033[0m\n");
+                        ok = 0;
+                    } else {
+                        ok = 1;
+                    }
+                } while (ok == 0);
+
+                /* Redirection des boutons */
+                if (choixPrincipal == 1) {
+                    afficherEmprunterLivre(tabUtilisateurs[indiceUtilisateur]);
+                } else if (choixPrincipal == 2) {
+                    afficherRendreLivre(tabUtilisateurs[indiceUtilisateur]);
+                } else if (choixPrincipal == 3) {
+                    /* Le choix 3 deconnecte toujours l'utilisateur */
+                    if (afficherVerifDeconnexion() == 2) { // 2 = Oui
+                        deconnecte = 1;
+                    }
+                } else if (choixPrincipal == 4) {
+                    /* Le choix 4 n'est accessible qu'au prof pour ajouter un livre */
+                    afficherAjouterLivre(tabUtilisateurs[indiceUtilisateur]);
+                }
+
+            } while (deconnecte == 0);
+
