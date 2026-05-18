@@ -1,7 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#include "donnees.h"
+#include "donnee.h"
 
 void viderbuffer();
 int saisirEntierSecurise();
