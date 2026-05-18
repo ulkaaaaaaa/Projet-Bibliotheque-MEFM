@@ -4,7 +4,6 @@
 #include <unistd.h>    // pour sleep et usleep : pour les pauses entre les points pour la fonction
 #include <time.h>      // pour ctime dans afficherStatusUtilisateur
 #include "donnees.h"
-#include "metier.h"
 #include "interface.h"
 
 //retirer les valeures restantes//
