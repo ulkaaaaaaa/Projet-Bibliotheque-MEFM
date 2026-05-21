@@ -86,9 +86,8 @@ int main() {
 
             } while (deconnecte == 0);
 
-        } else if (choixDepart == 2) {
-            /* --- CRÉATION DE COMPTE --- */
-            afficherCreerCompte();
+        } else if (choixDepart == 2) {    //Creer un compte
+               afficherCreerCompte();
         }
 
     } while (choixDepart != 3); /* 3 = Quitter */
