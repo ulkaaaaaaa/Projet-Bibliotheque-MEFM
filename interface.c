@@ -160,9 +160,7 @@ void afficherCreerCompte() {
     printf("\033[0m");
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
-    printf("\033[36m");
-    printf("   ▬▬▶Entrer 0 pour quitter");
-    printf("\033[0m");
+
  
     do {         // boucle globale : recommence si identifiant déjà pris
         resultat = 0;
@@ -170,12 +168,17 @@ void afficherCreerCompte() {
         // boucle identifiant
         do {
             valide = 1;
+            printf("Mettre retour pour annuler");
             printf(" ▫ Identifiant (entre 4 et 20 caractères) : ");
             fgets(login, sizeof(login), stdin);
             if (login[strlen(login)-1] != '\n') {
                 viderbuffer();  // vide le reste si trop long
             }
             login[strcspn(login, "\n")] = '\0';
+            
+            if (strcmp(login, "retour") == 0) {     //retour menu
+                return;      
+            }     
 
             if (strlen(login) < 4 || strlen(login) > 20) {
                 printf("\033[31m");    //rouge
@@ -209,6 +212,10 @@ void afficherCreerCompte() {
                 viderbuffer();  // vide le reste si trop long
             }
             mdp[strcspn(mdp, "\n")] = '\0';
+
+            if (strcmp(mdp, "retour") == 0) {     //retour menu
+                return;
+            }
 
             if (strlen(mdp) < 4 || strlen(mdp) > 20) {            
                 printf("\033[31mErreur : entre 4 et 20 caractères.\033[0m\n");
@@ -305,12 +312,17 @@ int afficherSeConnecter() {
 
     do {            
         // saisie de l'identifiant
+        printf("Mettre retour pour annuler");
         printf(" ▫ Identifiant : ");
         fgets(login, sizeof(login), stdin);
         if (login[strlen(login)-1] != '\n') {
             viderbuffer();
         }
         login[strcspn(login, "\n")] = '\0';
+
+        if (strcmp(login, "retour") == 0){    //retour menu
+            return -1;
+        }
 
         // saisie mot de passe
         printf(" ▫ Mot de passe : ");
@@ -319,6 +331,10 @@ int afficherSeConnecter() {
             viderbuffer();
         }
         mdp[strcspn(mdp, "\n")] = '\0';
+
+        if (strcmp(mdp, "retour") == 0){    //retour menu
+            return -1;
+        }
 
         // vérification combinaison
         index = authentifier(login, mdp);
@@ -517,18 +533,25 @@ void afficherEmprunterLivre(Utilisateur u) {
         trierLivresAuteur(tabLivres, nbLivres);
         afficherLivres();
     } else if (choix == 3) {        //Tri par categorie
-        printf("▬▬▶ Entrez la catégorie : ");         //Choix de la categorie
+        printf("▬▬▶ Entrez la catégorie (retour pour annuler) : ");         //Choix de la categorie
         fgets(categorie, sizeof(categorie), stdin);
         if (categorie[strlen(categorie)-1] != '\n') {
             viderbuffer();
         }
         categorie[strcspn(categorie, "\n")] = '\0';
+        
+        if (strcmp(categorie, "retour") == 0){     //retour menu
+            return;
+        }
         rechercherParCategorie(tabLivres, nbLivres, categorie);
     }
 
     printf("\n");
-    printf("\n▬▬▶ Entrez l'ID du livre : ");           // saisie ID et traitement
+    printf("\n▬▬▶ Entrez l'ID du livre (0 pour retour) : ");          // saisie ID et traitement
     idChoisi = saisirEntierSecurise();
+    if (idChoisi == 0){
+        return;
+    }
 
     resultat = traiterEmprunt(idChoisi, u.login, tabLivres, nbLivres, tabUtilisateurs, nbUtilisateurs);
     printf("┌────────────────────────────────────────────────────────────┐\n");
@@ -679,17 +702,25 @@ void afficherAjouterLivre(Utilisateur u) {          //prof peut ajouter un livre
         return;
     }
 
-    printf(" ▫ Titre du livre : ");        //Le prof npeut entrer les différentes infos
+     
+    printf(" ▫ Titre du livre (retour pour annuler) : ");         //Le prof npeut entrer les différentes infos
     fgets(titre, sizeof(titre), stdin);
     titre[strcspn(titre, "\n")] = '\0';
-
-    printf(" ▫ Auteur : ");
+    if (strcmp(titre, "retour") == 0){
+        return;  // retour
+    }
+    printf(" ▫ Auteur (retour pour annuler) : ");
     fgets(auteur, sizeof(auteur), stdin);
     auteur[strcspn(auteur, "\n")] = '\0';
-
-    printf(" ▫ Catégorie : ");
+    if (strcmp(auteur, "retour") == 0){
+        return;  // retour
+    }
+    printf(" ▫ Catégorie (retour pour annuler) : ");
     fgets(categorie, sizeof(categorie), stdin);
     categorie[strcspn(categorie, "\n")] = '\0';
+    if (strcmp(categorie, "retour") == 0){
+        return;  // retour
+    }
 
     resultat = ajouterLivre(titre, auteur, categorie);         //ajout du livre dans la bibliothèque
 
