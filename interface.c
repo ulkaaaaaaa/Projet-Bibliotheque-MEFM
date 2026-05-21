@@ -564,6 +564,7 @@ void afficherRendreLivre(Utilisateur u) {
     printf("\033[0m");
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    
 
     if (u.nbLivresActuels == 0) {    // si l'utilisateur n'a aucun livre
         printf("║");
@@ -594,13 +595,20 @@ void afficherRendreLivre(Utilisateur u) {
             printf("║\n");
         }
     }
-
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("║");
+    printf("\033[31m");
+    printf(" 0. Retour                                                                     ");
+    printf("\033[0m");
+    printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     printf("\n");
 
     do {          // saisie sécurisée de l'ID
         printf("▬▬▶ Entrez l'ID du livre à rendre : ");
         idChoisi = saisirEntierSecurise();
+        
+        if (idChoisi == 0) return; //retour au menu principal
         
         resultat = 0;       // vérifier que l'ID appartient bien à l'utilisateur
         for (i = 0; i < nbLivres; i++) {
