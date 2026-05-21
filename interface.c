@@ -32,12 +32,12 @@ void afficherAccueil() {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║                                ");
     printf("\033[1;36m");
-    printf("CY-biblioTECH                                 ");   //bleu pour tout le texte + gras avec "1"//
+    printf("CY-biblioTECH                                  ");   //bleu pour tout le texte + gras avec "1"//
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║                          ");
     printf("\033[1;36m");
-    printf("Bibliothèque universitaire                            ");
+    printf("Bibliothèque universitaire                           ");
     printf("\033[0m"); // retour blanc //
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -160,6 +160,9 @@ void afficherCreerCompte() {
     printf("\033[0m");
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("\033[36m");
+    printf("   ▬▬▶Entrer 0 pour quitter");
+    printf("\033[0m");
  
     do {         // boucle globale : recommence si identifiant déjà pris
         resultat = 0;
