@@ -38,7 +38,9 @@ int main() {
         do {
             choixDepart = saisirEntierSecurise();
             if (choixDepart < 1 || choixDepart > 3) {
-                printf("\033[31mChoix invalide.\033[0m\n");
+                printf("\033[31m");
+                printf("Choix invalide.\n");
+                printf("\033[0m");
             }
         } while (choixDepart < 1 || choixDepart > 3);
 
@@ -97,8 +99,9 @@ int main() {
 
     /* Petit message de fin avec écran nettoyé */
     printf("\033[2J\033[H"); 
-    printf("\033[32mSauvegarde effectuee. Au revoir et a bientot !\033[0m\n\n");
-
+    printf("\033[32m");
+    printf("Sauvegarde effectuee. Au revoir et à bientot !\n");
+    printf("\033[0m");
     return 0;
 }
 
