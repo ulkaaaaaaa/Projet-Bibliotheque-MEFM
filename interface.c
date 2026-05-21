@@ -32,7 +32,7 @@ void afficherAccueil() {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║                                ");
     printf("\033[1;36m");
-    printf("CY-biblioTECH                                  ");   //bleu pour tout le texte + gras avec "1"//
+    printf("CY-biblioTECH                                 ");   //bleu pour tout le texte + gras avec "1"//
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("║                          ");
@@ -63,7 +63,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
     printf("┌────────────────────────────────────────────────────────────────────────────────┐\n");
     printf("│    ");
     printf("\033[1;36m");     //bleu
-    printf("                      Vos livres en cours                                ");
+    printf("                      Vos livres en cours                                   ");
     printf("\033[0m");
     printf("│\n");
     printf("├────────────────────────────────────────────────────────────────────────────────┤\n");
@@ -71,7 +71,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
     if (u.nbLivresActuels == 0) {
         printf("│");
         printf("\033[32m");     //vert
-        printf("   Aucun livre emprunté                                                        ");
+        printf("   Aucun livre emprunté                                                         ");
         printf("\033[0m");
         printf("│\n");
 
@@ -80,7 +80,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
         if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {       // message retard 
             printf("│");
             printf("\033[31m");     //rouge
-            printf("   ◬ Attention : vous avez des livres en retard !                              ");
+            printf("             ◬ Attention : vous avez des livres en retard !                     ");
             printf("\033[0m");
             printf("│\n");
             printf("├────────────────────────────────────────────────────────────────────────────────┤\n");
@@ -156,7 +156,7 @@ void afficherCreerCompte() {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");
-    printf("                        Créer un compte                                   ");
+    printf("                         Créer un compte                                   ");
     printf("\033[0m");
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -230,7 +230,7 @@ void afficherCreerCompte() {
 
         // choix du rôle
         printf("\n");
-        printf("\033[1;36m");
+        printf("\033[1;33m");    //jaune
         printf(" ▫ Choix du rôle :  1. Etudiant  ou  2. Professeur \n");
         printf("\033[0m");
         printf("\n");
@@ -294,7 +294,7 @@ int afficherSeConnecter() {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");
-    printf("                          Se connecter                                    ");
+    printf("                           Se connecter                                    ");
     printf("\033[0m");
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -350,7 +350,7 @@ void afficherMenuPrincipal(Utilisateur u) {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║");
     printf("\033[1;36m");  //bleu pour tout le texte 
-    printf("                                 Menu Principal                                  "); 
+    printf("                                Menu Principal                                  "); 
     printf("\033[0m");   // retour blanc //
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
@@ -396,18 +396,18 @@ int afficherVerifDeconnexion() {
     printf("\033[2J\033[H");  // efface écran 
     printf("┌────────────────────────────────────────────────────────────┐\n"); 
     printf("│");
-    printf("\033[1;36m");  //bleu pour tout le texte
+    printf("\033[31m");  //rouge 
     printf("          Voulez-vous vraiment vous deconnecter?             ");
     printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("│");
-    printf("\033[1;36m");  //bleu pour tout le texte
-    printf(" 1.Non                                                       ");
+    printf("\033[36m");  //bleu 
+    printf(" 1.Non                                                      ");
     printf("\033[0m"); // retour blanc  
     printf("│\n");
     printf("│");
     printf("\033[31m");  // rouge 
-    printf(" 2.Oui                                                       ");
+    printf(" 2.Oui                                                      ");
     printf("\033[0m"); // retour blanc 
     printf("│\n");
     printf("└────────────────────────────────────────────────────────────┘\n");
@@ -462,7 +462,7 @@ void afficherEmprunterLivre(Utilisateur u) {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"
-    printf("                      Emprunter un nouveau livre                             "); 
+    printf("                      Emprunter un nouveau livre                            "); 
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
@@ -557,7 +557,7 @@ void afficherRendreLivre(Utilisateur u) {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");
-    printf("                        Rendre un livre                                   ");
+    printf("                         Rendre un livre                                   ");
     printf("\033[0m");
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
