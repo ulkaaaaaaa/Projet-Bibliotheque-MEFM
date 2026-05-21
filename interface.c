@@ -5,6 +5,7 @@
 #include <time.h>      // pour ctime dans afficherStatusUtilisateur
 #include "donnee.h"
 #include "interface.h"
+#include "metier.h" 
 
 //retirer les valeures restantes//
 
@@ -159,8 +160,14 @@ void afficherCreerCompte() {
     printf("                         Créer un compte                                   ");
     printf("\033[0m");
     printf("║\n");
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("║");
+    printf("\033[31m");
+    printf(" 0. Retour (taper 'retour' lors de la saisie)                                  ");
+    printf("\033[0m");
+    printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
-
+    printf("\n");
  
     do {         // boucle globale : recommence si identifiant déjà pris
         resultat = 0;
@@ -168,7 +175,7 @@ void afficherCreerCompte() {
         // boucle identifiant
         do {
             valide = 1;
-            printf("Mettre retour pour annuler");
+            printf("Mettre retour pour annuler\n");
             printf(" ▫ Identifiant (entre 4 et 20 caractères) : ");
             fgets(login, sizeof(login), stdin);
             if (login[strlen(login)-1] != '\n') {
@@ -277,6 +284,12 @@ void afficherCreerCompte() {
             printf("                        Créer un compte                                   ");
             printf("\033[0m");
             printf("║\n");
+            printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+            printf("║");
+            printf("\033[31m");
+            printf(" 0. Retour (taper 'retour' lors de la saisie)                                  ");
+            printf("\033[0m");
+            printf("║\n");
             printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
             printf("\n");
         }
@@ -312,7 +325,7 @@ int afficherSeConnecter() {
 
     do {            
         // saisie de l'identifiant
-        printf("Mettre retour pour annuler");
+        printf("Mettre retour pour annuler\n");
         printf(" ▫ Identifiant : ");
         fgets(login, sizeof(login), stdin);
         if (login[strlen(login)-1] != '\n') {
@@ -463,12 +476,12 @@ void afficherEmprunterLivre(Utilisateur u) {
             printf("\033[31m");        //rouge
             printf("            ◬ Vous avez des livres en retard! ◬             ");
             printf("\033[0m");
-            printf("\n");
+            
         } else {
             printf("\033[31m");         //rouge
             printf("           ◬ Nombre d'emprunt maximum atteint! ◬             ");
             printf("\033[0m");
-            printf("\n");
+            
         }
         printf("│\n");
         printf("└────────────────────────────────────────────────────────────┘\n");
