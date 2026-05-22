@@ -5,7 +5,7 @@
 #include <time.h>      // pour ctime dans afficherStatusUtilisateur
 #include "donnee.h"
 #include "interface.h"
-#include "metier.h" 
+
 
 //retirer les valeures restantes//
 
