@@ -23,8 +23,27 @@ Architecture du code:
                      - 'fichier.c'  : lecture et écriture des fichiers txt 
                      - 'main.c'     : fichier principal permet d'executer le tout 
 
-Mode d'emploi:
+Mode d'emploi: 
 
+
+
+
+
+
+
+
+Repartition des taches: 
+
+            Youssef: donnee.c; fichier.c
+            Uliana : metier.c;readme; verification, unifier le code et securiser
+            Jeanne : interface.c; main.c
+            
+Difficultés rencontrés:
+
+La difficulté principal a été de se repartir le travail de maniere efficace, une personne les données, une les regles et l'autre l'interface, la difficulté a alors était de savoir par quoi et comment commencer. Par la suite chacun a essayer de coder de partie mais ça a crée des soucis vu qu'on s'etait pas mis d'accord sur ce que chaque fonction prennait en parametre et sur ce qu'elle renvoyé. Ainsi on a du reprendre certain code pour que ça compile bien.De plus pour l'interface le travail sur les couleurs étant nouveaux ne fut pas facile.
+
+Solutions apportés:
+Aprés les vacances voyant qu'on stagnait sur l'avancer on a prit le temps d'expliquer les avancées de chacun et on s'est mis d'accord sur la structure globale. De plus voyant que les descriptions commits n'étaient pas toujours regarder on a décidé de créer un groupe sur lequel chacun expliqué les changements apportés et c'est raison. Ce qui a permit d'avoir un meilleur aperçu sur le code globale et comment avancer
 
 
             
