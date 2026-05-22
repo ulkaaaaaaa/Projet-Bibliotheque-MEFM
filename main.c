@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "donnee.h"
-#include "metier.h"
 #include "interface.h"
 
 int main() {
