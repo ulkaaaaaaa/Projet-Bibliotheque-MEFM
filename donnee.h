@@ -62,7 +62,7 @@ int traiterRetour(int idLivre, char loginUtilisateur[], Livre inventaire[], int 
 
 void trierLivresTitre(Livre inventaire[], int nbLivres);
 void trierLivresAuteur(Livre inventaire[], int nbLivres);
-void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCible[]);
+int rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCible[]);
 
 #endif
 

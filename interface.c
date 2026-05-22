@@ -543,7 +543,6 @@ void afficherEmprunterLivre(Utilisateur u) {
     if (choix == 0) {    //Selectionner RETOUR donc retour au menu principal
         return;        
     }
-    
     printf("\033[2J\033[H");     //efface ecran
     if (choix == 1) {         //Tri par titre
         trierLivresTitre(tabLivres, nbLivres);
@@ -552,18 +551,23 @@ void afficherEmprunterLivre(Utilisateur u) {
         trierLivresAuteur(tabLivres, nbLivres);
         afficherLivres();
     } else if (choix == 3) {        //Tri par categorie
-        printf("▬▬▶ Entrez la catégorie (retour pour annuler) : ");         //Choix de la categorie
-        fgets(categorie, sizeof(categorie), stdin);
-        if (categorie[strlen(categorie)-1] != '\n') {
-            viderbuffer();
-        }
-        categorie[strcspn(categorie, "\n")] = '\0';
+        int categorie_existe = 0;
+        while (categorie_existe != 1){
+            printf("▬▬▶ Entrez la catégorie (retour pour annuler) : ");         //Choix de la categorie
+            fgets(categorie, sizeof(categorie), stdin);
+            if (categorie[strlen(categorie)-1] != '\n') {
+                viderbuffer();
+            }
+            categorie[strcspn(categorie, "\n")] = '\0';
         
-        if (strcmp(categorie, "retour") == 0){     //retour menu
-            return;
+            if (strcmp(categorie, "retour") == 0){     //retour menu
+                return;
+            }
+            categorie_existe = rechercherParCategorie(tabLivres, nbLivres, categorie);
+            
         }
-        rechercherParCategorie(tabLivres, nbLivres, categorie);
     }
+
 
     printf("\n");
     printf("\n▬▬▶ Entrez l'ID du livre (0 pour retour) : ");          // saisie ID et traitement

@@ -226,13 +226,13 @@ void trierLivresAuteur(Livre inventaire[], int nbLivres) {
 
 
 /* Parcourir l'inventaire  et affiche les livres de la categorie demande */
-void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCible[]) {
+int rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCible[]) {
     int i;
     int trouve = 0; /*  0 = rien trouvé, 1 = au moins un livre trouvé */
 
 
     if (inventaire == NULL || nbLivres <= 0 || categorieCible == NULL) {
-        return; 
+        return 1; 
     }
 
     printf("\n=== Resultats pour la categorie : %s ===\n", categorieCible);
@@ -258,6 +258,7 @@ void rechercherParCategorie(Livre inventaire[], int nbLivres, char categorieCibl
         printf("Desole, aucun livre trouve dans la categorie '%s'.\n", categorieCible);
     }
     printf("==============================================\n");
+    return trouve;
 }
 
 
