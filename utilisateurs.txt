@@ -1,2 +1,3 @@
 etudiant1;1234;0;0
 prof1;abcd;1;0
+etud2;poups;1;1

@@ -3,3 +3,4 @@
 3;Medee;Euripide;Theatre;0;0;VIDE
 4;Hamlet;William Shakespear;Theatre;0;0;VIDE
 5;Madame Bovary;Gustave Flaubert;Roman;0;0;VIDE
+6;tomtom & nana;Despres;Bande dessine;1;1779472737;etud2
