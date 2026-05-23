@@ -626,7 +626,7 @@ void afficherEmprunterLivre(Utilisateur u) {
 
 
 
-cvoid afficherRendreLivre(Utilisateur u) {
+void afficherRendreLivre(Utilisateur u) {
     int idChoisi;
     int resultat;
     int i;
