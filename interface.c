@@ -732,6 +732,63 @@ void afficherRendreLivre(Utilisateur u) {
 }
 
 
+void afficherAjouterLivre(Utilisateur u) {          //prof peut ajouter un livre
+    char titre[100];
+    char auteur[100];
+    char categorie[50];
+    int resultat;
 
+    printf("\033[2J\033[H"); // efface écran 
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║    ");
+    printf("\033[1;33m"); // Jaune
+    printf("                    Espace Professeur : Ajouter un livre                       ");
+    printf("\033[0m");
+    printf("║\n");
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+
+    if (peutAjouterLivre(u) == 0) {       //Sécurité pour être sur que c'est un prof
+        printf("\033[31m");     //rouge
+        printf("Erreur : Seuls les professeurs peuvent ajouter des livres.\n");
+        printf("\033[0m");
+        sleep(2);
+        return;
+    }
+
+    printf(" ▫ Titre du livre (retour pour annuler) : ");
+    fgets(titre, sizeof(titre), stdin);
+    titre[strcspn(titre, "\n")] = '\0';
+    if (strcmp(titre, "retour") == 0) return;  // retour
+
+    printf(" ▫ Auteur (retour pour annuler) : ");
+    fgets(auteur, sizeof(auteur), stdin);
+    auteur[strcspn(auteur, "\n")] = '\0';
+    if (strcmp(auteur, "retour") == 0) return;  // retour
+
+    printf(" ▫ Catégorie (retour pour annuler) : ");
+    fgets(categorie, sizeof(categorie), stdin);
+    categorie[strcspn(categorie, "\n")] = '\0';
+    if (strcmp(categorie, "retour") == 0) return;  // retour
+
+    resultat = ajouterLivre(titre, auteur, categorie);         //ajout du livre dans la bibliothèque
+
+    printf("\n┌────────────────────────────────────────────────────────────┐\n");
+    printf("│");
+    if (resultat == 1) {
+        printf("\033[32m");              //vert
+        printf("               Livre ajouté avec succès !                     ");
+        printf("\033[0m");
+    } else {
+        printf("\033[31m");      //rouge
+        printf("         Erreur : La bibliothèque est pleine.                 ");
+        printf("\033[0m");
+    }
+    printf("│\n");
+    printf("└────────────────────────────────────────────────────────────┘\n");
+
+    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
+    viderbuffer();
+    getchar();
+}
 
 
