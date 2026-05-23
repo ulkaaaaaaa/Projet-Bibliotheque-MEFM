@@ -25,9 +25,13 @@ Architecture du code:
 
 Mode d'emploi: 
         - Dans la terminal : git clone https://github.com/ulkaaaaaaa/Projet-Bibliotheque-MEFM.git      //Récupère                                                              dans github les fichiers et crée un nouveau dossier avec
+        
                              cd Projet-Bibliotheque-MEFM              //On se place dans le dossier
+                             
                              gcc main.c donnees.c fichiers.c metier.c interface.c -o bibliotheque      //On compile                                                                             le programme avec un nom ici bibliotheque
+                             
                              ./bibliotheque    //On lance le programme
+                             
          - La bibliothèque s'ouvre et il suffit alors de simplement suivre les instructions 
 
 
