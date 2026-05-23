@@ -24,7 +24,9 @@ Architecture du code:
                      - 'main.c'     : fichier principal permet d'executer le tout 
 
 Mode d'emploi: 
-        - Dans la terminal : git clone https://github.com/ulkaaaaaaa/Projet-Bibliotheque-MEFM.git      //Récupère                                                              dans github les fichiers et crée un nouveau dossier avec
+
+        - Dans la terminal : 
+                             git clone https://github.com/ulkaaaaaaa/Projet-Bibliotheque-MEFM.git      //Récupère                                                              dans github les fichiers et crée un nouveau dossier avec
         
                              cd Projet-Bibliotheque-MEFM              //On se place dans le dossier
                              
