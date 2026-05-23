@@ -77,7 +77,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
         printf("│\n");
         printf("└────────────────────────────────────────────────────────────────────────────────┘\n");
         }
-     } else {
+    else {
 
         if (avoirDesRetards(u, tabLivres, nbLivres) == 1) {       // message retard 
             printf("│");
