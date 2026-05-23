@@ -417,7 +417,7 @@ void afficherMenuPrincipal(Utilisateur u) {
     if (u.role == PROFESSEUR) {  // Si prof : ajout d'un livre possible
         printf("║");
         printf("\033[33m");  // Jaune
-        printf(" 4. Ajouter un livre au catalogue                                             ");
+        printf(" 4. Ajouter un livre au catalogue                                              ");
         printf("\033[0m");   
         printf("║\n");
     }
