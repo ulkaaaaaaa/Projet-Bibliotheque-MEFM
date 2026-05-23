@@ -11,11 +11,9 @@ int main() {
     int ok;
     int limiteMax;
 
-    /* 1. Initialisation de la memoire globale */
-    initialiserBibliotheque();
+    initialiserBibliotheque();      //initialisation de la memoire globale 
 
-    /* 2. Chargement des fichiers de sauvegarde */
-    ok = chargerLivres("livres.txt");
+    ok = chargerLivres("livres.txt");         //chargement des fichiers de sauvegarde 
     if (ok == 0) {
         printf("\033[33m");
         printf("Info : Fichier livres.txt introuvable. Demarrage avec un catalogue vide.\n");
@@ -29,11 +27,9 @@ int main() {
         printf("\033[0m");
     }
 
-    /* 3. Lancement de l'interface graphique */
-    afficherAccueil();
+    afficherAccueil();        //lancement de l'interface graphique 
 
-    /* BOUCLE NIVEAU 1 : Menu d'accueil */
-    do {
+    do {        //BOUCLE NIVEAU 1 : menu d'accueil 
         afficherMenuDepart();
 
         do {
@@ -48,24 +44,23 @@ int main() {
 
         if (choixDepart == 1) {
 
-            /* --- CONNEXION --- */
-            indiceUtilisateur = afficherSeConnecter();
+            indiceUtilisateur = afficherSeConnecter();  //connection
 
-            /* si l'utilisateur a tapé retour */
-            if (indiceUtilisateur != -1) {
+            if (indiceUtilisateur != -1) {                      //si l'utilisateur a tapé retour 
 
-                /* status dès la connexion */
-                afficherStatusUtilisateur(tabUtilisateurs[indiceUtilisateur]);
+                afficherStatusUtilisateur(tabUtilisateurs[indiceUtilisateur]);      //status dès la connexion 
 
                 deconnecte = 0;
 
-                /* BOUCLE NIVEAU 2 : Menu principal */
-                do {
+                do {       //BOUCLE NIVEAU 2 : menu principal 
                     afficherMenuPrincipal(tabUtilisateurs[indiceUtilisateur]);
 
-                    /* saisie sécurisée selon le rôle */
-                    limiteMax = (tabUtilisateurs[indiceUtilisateur].role == PROFESSEUR) ? 4 : 3;
-
+                    if (tabUtilisateurs[indiceUtilisateur].role == PROFESSEUR) {
+                        limiteMax = 4;  // prof peut choisir 1, 2, 3 ou 4
+                    } else {
+                        limiteMax = 3;  // étudiant peut choisir 1, 2 ou 3
+                    }
+                    
                     do {
                         choixPrincipal = saisirEntierSecurise();
                         if (choixPrincipal < 0 || choixPrincipal > limiteMax) {
@@ -86,18 +81,16 @@ int main() {
                         afficherRendreLivre(tabUtilisateurs[indiceUtilisateur]);
 
                     } else if (choixPrincipal == 3) {
-                        /* 0 = Oui se déconnecter dans afficherVerifDeconnexion */
-                        if (afficherVerifDeconnexion() == 0) {
+                        if (afficherVerifDeconnexion() == 0) {    //0 = Oui se déconnecter dans afficherVerifDeconnexion
                             deconnecte = 1;
                         }
 
-                    } else if (choixPrincipal == 4) {
-                        /* uniquement accessible au prof */
+                    } else if (choixPrincipal == 4) {     //uniquement prof 
+                        
                         afficherAjouterLivre(tabUtilisateurs[indiceUtilisateur]);
 
                     } else if (choixPrincipal == 0) {
-                        /* retour au menu départ */
-                        deconnecte = 1;
+                        deconnecte = 1;   //retour au menu départ 
                     }
 
                 } while (deconnecte == 0);
@@ -109,14 +102,13 @@ int main() {
 
     } while (choixDepart != 3);
 
-    /* 4. Sauvegarde finale */
-    sauvegarderLivres("livres.txt");
+    
+    sauvegarderLivres("livres.txt");     //sauvegarde finale 
     sauvegarderUtilisateurs("utilisateurs.txt");
 
-    /* Message de fin */
-    printf("\033[2J\033[H");
+    printf("\033[2J\033[H");   
     printf("\033[32m");
-    printf("Sauvegarde effectuee. Au revoir et a bientot !\n");
+    printf("Sauvegarde effectuee. Au revoir et a bientot !\n");         //message de fin 
     printf("\033[0m");
 
     return 0;
