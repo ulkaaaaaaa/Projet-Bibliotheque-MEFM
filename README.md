@@ -34,7 +34,8 @@ Mode d'emploi:
                              
                              ./bibliotheque    //On lance le programme
                              
-         - La bibliothèque s'ouvre et il suffit alors de simplement suivre les instructions 
+         - La bibliothèque s'ouvre et il suffit alors de simplement suivre les instructions ; 
+         soit entrer le chiffre correspondant à la demande, le mot ou encore appuyer sur entrée (2 fois à la suite) 
 
 
 
