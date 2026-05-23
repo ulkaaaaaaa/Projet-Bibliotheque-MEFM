@@ -472,6 +472,12 @@ void afficherEmprunterLivre(Utilisateur u) {
     int idChoisi;
     int resultat;
     char categorie[50];
+    char categories[50][50];
+    int nbCategories;
+    int i;
+    int j;
+    int dejaTrouvee;
+    int categorie_existe;
 
     printf("\033[2J\033[H");  // efface écran 
 
@@ -487,9 +493,8 @@ void afficherEmprunterLivre(Utilisateur u) {
             printf("\033[1;31m");         //rouge
             printf("           ◬ Nombre d'emprunt maximum atteint! ◬             ");
             printf("\033[0m");
-            
+            printf("│\n");
         }
-        printf("│\n");
         printf("└────────────────────────────────────────────────────────────┘\n");
         printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
         viderbuffer();
@@ -543,7 +548,9 @@ void afficherEmprunterLivre(Utilisateur u) {
     if (choix == 0) {    //Selectionner RETOUR donc retour au menu principal
         return;        
     }
+
     printf("\033[2J\033[H");     //efface ecran
+
     if (choix == 1) {         //Tri par titre
         trierLivresTitre(tabLivres, nbLivres);
         afficherLivres();
@@ -551,8 +558,31 @@ void afficherEmprunterLivre(Utilisateur u) {
         trierLivresAuteur(tabLivres, nbLivres);
         afficherLivres();
     } else if (choix == 3) {        //Tri par categorie
-        int categorie_existe = 0;
-        while (categorie_existe != 1){
+
+        nbCategories = 0;         // trouver toutes les catégories sans doublon
+        for (i = 0; i < nbLivres; i++) {
+            dejaTrouvee = 0;
+            for (j = 0; j < nbCategories; j++) {
+                if (strcmp(tabLivres[i].categorie, categories[j]) == 0) {
+                    dejaTrouvee = 1;
+                    break;
+                }
+            }
+            if (dejaTrouvee == 0) {
+                strcpy(categories[nbCategories], tabLivres[i].categorie);
+                nbCategories++;
+            }
+        }
+
+        printf("Catégories disponibles : ");        // afficher des catégories disponibles
+        for (j = 0; j < nbCategories; j++) {
+            printf("%s", categories[j]);
+            if (j < nbCategories - 1) printf(", ");
+        }
+        printf("\n");
+
+        categorie_existe = 0;  // saisie de la catégorie
+        while (categorie_existe != 1) {
             printf("▬▬▶ Entrez la catégorie (retour pour annuler) : ");         //Choix de la categorie
             fgets(categorie, sizeof(categorie), stdin);
             if (categorie[strlen(categorie)-1] != '\n') {
@@ -560,19 +590,17 @@ void afficherEmprunterLivre(Utilisateur u) {
             }
             categorie[strcspn(categorie, "\n")] = '\0';
         
-            if (strcmp(categorie, "retour") == 0){     //retour menu
+            if (strcmp(categorie, "retour") == 0) {     //retour menu
                 return;
             }
             categorie_existe = rechercherParCategorie(tabLivres, nbLivres, categorie);
-            
         }
     }
-
 
     printf("\n");
     printf("\n▬▬▶ Entrez l'ID du livre (0 pour retour) : ");          // saisie ID et traitement
     idChoisi = saisirEntierSecurise();
-    if (idChoisi == 0){
+    if (idChoisi == 0) {
         return;
     }
 
@@ -595,6 +623,7 @@ void afficherEmprunterLivre(Utilisateur u) {
     viderbuffer();
     getchar();
 }
+
 
 
 void afficherRendreLivre(Utilisateur u) {
