@@ -116,9 +116,9 @@ void afficherMenuDepart() {
     printf("\033[2J\033[H");  // efface écran 
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
-    printf("\033[1;36m");  //bleu pour tout le texte + gras avec "1"//
+    printf("\033[1;36m");  //bleu + gras 
     printf("Bienvenue dans la bibliothèque en ligne de votre établissement CY-Tech     ");
-    printf("\033[0m");   // retour blanc //
+    printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
@@ -626,7 +626,7 @@ void afficherEmprunterLivre(Utilisateur u) {
 
 
 
-void afficherRendreLivre(Utilisateur u) {
+cvoid afficherRendreLivre(Utilisateur u) {
     int idChoisi;
     int resultat;
     int i;
@@ -638,35 +638,41 @@ void afficherRendreLivre(Utilisateur u) {
     printf("                         Rendre un livre                                   ");
     printf("\033[0m");
     printf("║\n");
-    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     
 
     if (u.nbLivresActuels == 0) {    // si l'utilisateur n'a aucun livre
+        printf("║");
         printf("\033[32m");        //vert
         printf("   Vous n'avez aucun livre emprunté.                                           ");
         printf("\033[0m");
+        printf("║\n");
+        printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
         printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
         viderbuffer();
         getchar();
         return;     //retour au menu principal
     }
 
-    
+    printf("║");        // titre des colonnes
     printf("\033[1m");
-    printf(" %-35s | %-20s | ID  ", "Titre", "Auteur");   
+    printf(" %-35s | %-20s | %-5s", "Titre", "Auteur", "ID");
     printf("\033[0m");
-    
+    printf("║\n");
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
 
-    /* Recherche par loginEmprunteur pour retrouver les livres de l'utilisateur */
-    for (i = 0; i < nbLivres; i++) {       
+    
+    for (i = 0; i < nbLivres; i++) {       //Recherche par loginEmprunteur pour retrouver les livres de l'utilisateur
         if (tabLivres[i].estEmprunte == 1 && strcmp(tabLivres[i].loginEmprunteur, u.login) == 0) {
+            printf("║");
             printf("\033[1m");    //gras
-            printf(" %-35s | %-20s | ID: %d", tabLivres[i].titre, tabLivres[i].auteur, tabLivres[i].id);
+            printf(" %-35s | %-20s | %-5d", tabLivres[i].titre, tabLivres[i].auteur, tabLivres[i].id);
             printf("\033[0m");
-            
+            printf("║\n");
         }
     }
-    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+
+    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
     printf("║");
     printf("\033[31m");
     printf(" 0. Retour                                                                     ");
@@ -719,72 +725,6 @@ void afficherRendreLivre(Utilisateur u) {
         printf("│\n");
         printf("└────────────────────────────────────────────────────────────┘\n");
     }
-
-    printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
-    viderbuffer();
-    getchar();
-}
-
-
-void afficherAjouterLivre(Utilisateur u) {          //prof peut ajouter un livre
-    char titre[100];
-    char auteur[100];
-    char categorie[50];
-    int resultat;
-
-    printf("\033[2J\033[H"); // efface écran 
-    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    printf("║    ");
-    printf("\033[1;33m"); // Jaune
-    printf("                   Espace Professeur : Ajouter un livre                    ");
-    printf("\033[0m");
-    printf("║\n");
-    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-
-    
-    if (peutAjouterLivre(u) == 0) {       //Sécurité pour çetre sur que c'est un prof
-        printf("\033[31m");     //rouge
-        printf("Erreur : Seuls les professeurs peuvent ajouter des livres.\n");
-        printf("\033[0m");
-        sleep(2);       //attente 2secondes puis sors du menu
-        return;
-    }
-
-     
-    printf(" ▫ Titre du livre (retour pour annuler) : ");         //Le prof npeut entrer les différentes infos
-    fgets(titre, sizeof(titre), stdin);
-    titre[strcspn(titre, "\n")] = '\0';
-    if (strcmp(titre, "retour") == 0){
-        return;  // retour
-    }
-    printf(" ▫ Auteur (retour pour annuler) : ");
-    fgets(auteur, sizeof(auteur), stdin);
-    auteur[strcspn(auteur, "\n")] = '\0';
-    if (strcmp(auteur, "retour") == 0){
-        return;  // retour
-    }
-    printf(" ▫ Catégorie (retour pour annuler) : ");
-    fgets(categorie, sizeof(categorie), stdin);
-    categorie[strcspn(categorie, "\n")] = '\0';
-    if (strcmp(categorie, "retour") == 0){
-        return;  // retour
-    }
-
-    resultat = ajouterLivre(titre, auteur, categorie);         //ajout du livre dans la bibliothèque
-
-    printf("\n┌────────────────────────────────────────────────────────────┐\n");
-    printf("│");
-    if (resultat == 1) {
-        printf("\033[32m");              //vert
-        printf("               Livre ajouté avec succès !                     ");
-        printf("\033[0m");
-    } else {
-        printf("\033[31m");      //rouge
-        printf("         Erreur : La bibliothèque est pleine.                 ");
-        printf("\033[0m");
-    }
-    printf("│\n");
-    printf("└────────────────────────────────────────────────────────────┘\n");
 
     printf("\n▬▬▶ Appuyez sur Entrée pour continuer.");
     viderbuffer();
