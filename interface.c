@@ -670,7 +670,7 @@ void afficherRendreLivre(Utilisateur u) {
             printf("\033[0m");
         }
     }
-
+    printf("\n");
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║");
     printf("\033[31m");
