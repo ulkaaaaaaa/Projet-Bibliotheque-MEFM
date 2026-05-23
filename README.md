@@ -24,10 +24,10 @@ Architecture du code:
                      - 'main.c'     : fichier principal permet d'executer le tout 
 
 Mode d'emploi: 
-        - Dans la terminal : git clone URL_DU_DEPOT            //Récupère dans github les fichiers et crée un nouveau dossier avec tous les fichiers du projet dedans
-                             cd Projet-Bibliotheque-MEFM              //
-                             gcc main.c donnees.c fichiers.c metier.c interface.c -o bibliotheque
-                             ./bibliotheque
+        - Dans la terminal : git clone https://github.com/ulkaaaaaaa/Projet-Bibliotheque-MEFM.git      //Récupère                                                              dans github les fichiers et crée un nouveau dossier avec
+                             cd Projet-Bibliotheque-MEFM              //On se place dans le dossier
+                             gcc main.c donnees.c fichiers.c metier.c interface.c -o bibliotheque      //On compile                                                                             le programme avec un nom ici bibliotheque
+                             ./bibliotheque    //On lance le programme
          - La bibliothèque s'ouvre et il suffit alors de simplement suivre les instructions 
 
 
