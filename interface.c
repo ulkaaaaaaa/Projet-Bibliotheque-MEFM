@@ -75,6 +75,8 @@ void afficherStatusUtilisateur(Utilisateur u) {
         printf("   Aucun livre emprunté                                                         ");
         printf("\033[0m");
         printf("│\n");
+        printf("└────────────────────────────────────────────────────────────────────────────────┘\n");
+        }
 
     } else {
 
@@ -84,7 +86,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
             printf("             ◬ Attention : vous avez des livres en retard !                     ");
             printf("\033[0m");
             printf("│\n");
-           printf("└────────────────────────────────────────────────────────────────────────────────┘\n");
+            printf("└────────────────────────────────────────────────────────────────────────────────┘\n");
         }
 
         for (i = 0; i < nbLivres; i++) {             // liste des livres
@@ -325,7 +327,7 @@ int afficherSeConnecter() {
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;36m");
-    printf("                           Se connecter                                     ");
+    printf("                           Se connecter                                    ");
     printf("\033[0m");
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -405,7 +407,7 @@ void afficherMenuPrincipal(Utilisateur u) {
     printf("║\n");
     printf("║");
     printf("\033[36m");  //bleu 
-    printf(" 2. Rendre un livre                                                            ");
+    printf(" 2. Rendre un livre                                                           ");
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
@@ -622,23 +624,22 @@ void afficherRendreLivre(Utilisateur u) {
         return;     //retour au menu principal
     }
 
-    printf("║");
+    
     printf("\033[1m");
     printf(" %-35s | %-20s | ID  ", "Titre", "Auteur");   
     printf("\033[0m");
-    printf("║\n");
+    
 
     /* Recherche par loginEmprunteur pour retrouver les livres de l'utilisateur */
     for (i = 0; i < nbLivres; i++) {       
         if (tabLivres[i].estEmprunte == 1 && strcmp(tabLivres[i].loginEmprunteur, u.login) == 0) {
-            printf("║");
             printf("\033[1m");    //gras
             printf(" %-35s | %-20s | ID: %d", tabLivres[i].titre, tabLivres[i].auteur, tabLivres[i].id);
             printf("\033[0m");
-            printf("║\n");
+            
         }
     }
-    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║");
     printf("\033[31m");
     printf(" 0. Retour                                                                     ");
