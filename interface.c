@@ -741,7 +741,7 @@ void afficherAjouterLivre(Utilisateur u) {          //prof peut ajouter un livre
     printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║    ");
     printf("\033[1;33m"); // Jaune
-    printf("                    Espace Professeur : Ajouter un livre                    ");
+    printf("                    Espace Professeur : Ajouter un livre                   ");
     printf("\033[0m");
     printf("║\n");
     printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
