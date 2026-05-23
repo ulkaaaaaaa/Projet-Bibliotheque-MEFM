@@ -90,7 +90,7 @@ void afficherStatusUtilisateur(Utilisateur u) {
 
         for (i = 0; i < nbLivres; i++) {             // liste des livres
             if (tabLivres[i].estEmprunte == 1 && strcmp(tabLivres[i].loginEmprunteur, u.login) == 0) {
-                printf("│");
+    
 
                 if (verifierRetard(tabLivres[i].dateRetour) == 1) {
                     printf("\033[31m");   // rouge si en retard
@@ -400,12 +400,12 @@ void afficherMenuPrincipal(Utilisateur u) {
     printf("\n");
     printf("║");
     printf("\033[36m");  //bleu 
-    printf(" 1. Emprunter un nouveau livre                                                  ");
+    printf(" 1. Emprunter un nouveau livre                                                 ");
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
     printf("\033[36m");  //bleu 
-    printf(" 2. Rendre un livre                                                           ");
+    printf(" 2. Rendre un livre                                                            ");
     printf("\033[0m");   // retour blanc 
     printf("║\n");
     printf("║");
