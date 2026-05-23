@@ -638,10 +638,11 @@ void afficherRendreLivre(Utilisateur u) {
     printf("                         Rendre un livre                                   ");
     printf("\033[0m");
     printf("║\n");
-    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    
     
 
     if (u.nbLivresActuels == 0) {    // si l'utilisateur n'a aucun livre
+        printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
         printf("║");
         printf("\033[32m");        //vert
         printf("   Vous n'avez aucun livre emprunté.                                           ");
@@ -653,26 +654,24 @@ void afficherRendreLivre(Utilisateur u) {
         getchar();
         return;     //retour au menu principal
     }
-
-    printf("║");        // titre des colonnes
-    printf("\033[1m");
-    printf(" %-35s | %-20s | %-5s", "Titre", "Auteur", "ID");
+    
+    printf("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+    printf("\033[1m");          // titre des colonnes
+    printf(" %-35s | %-20s | %-5s\n", "Titre", "Auteur", "ID");
     printf("\033[0m");
-    printf("║\n");
-    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("─────────────────────────────────────────────────────────────────────────────────\n");
+
 
     
     for (i = 0; i < nbLivres; i++) {       //Recherche par loginEmprunteur pour retrouver les livres de l'utilisateur
         if (tabLivres[i].estEmprunte == 1 && strcmp(tabLivres[i].loginEmprunteur, u.login) == 0) {
-            printf("║");
             printf("\033[1m");    //gras
             printf(" %-35s | %-20s | %-5d", tabLivres[i].titre, tabLivres[i].auteur, tabLivres[i].id);
             printf("\033[0m");
-            printf("║\n");
         }
     }
 
-    printf("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+    printf("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
     printf("║");
     printf("\033[31m");
     printf(" 0. Retour                                                                     ");
