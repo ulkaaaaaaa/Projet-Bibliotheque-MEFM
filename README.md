@@ -41,12 +41,12 @@ Mode d'emploi:
                              make                                    //On compile le programme avec un nom ici bibliotheque
                              
                              sous linux: ./cy_bibliotech    //On lance le programme
-                             sous Windows: ./cy_bibliotech.exe 
+                             
                              
          - La bibliothèque s'ouvre et il suffit alors de simplement suivre les instructions ; 
          soit entrer le chiffre correspondant à la demande, le mot ou encore appuyer sur entrée (2 fois à la suite) 
 
-         Pour supprimer l'exécutable et nettoyer le dossier du projet, utiliser si sur Linux:
+         Pour supprimer l'exécutable et nettoyer le dossier du projet, utiliser :
 
                              make clean
 
