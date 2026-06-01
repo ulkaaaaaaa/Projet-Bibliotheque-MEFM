@@ -24,7 +24,7 @@ typedef struct {
 
 typedef struct {
     char login[50];
-    char mdp[21];
+    char mdp[21]; 
     int role;/* 0 pour etudiant, 1 pour prof */
     int nbLivresActuels;/* Compteur gere par le code d'Uliana */
 } Utilisateur;
